@@ -1,0 +1,183 @@
+<div th:fragment="navbar">
+    <style>
+        div header nav div ul li a:hover {
+            text-shadow: 1px 1px 1px rgb(130, 132, 223);
+            color: rgb(238, 234, 234);
+        }
+        
+        #leaf:hover {
+            text-shadow: 10px 5px 5px rgb(75, 160, 58);
+        }
+        
+        a.nav-link {
+            color: #ffffff;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        
+        #header {
+            font-size: 50px;
+            letter-spacing: -7px;
+            color: #808080;
+        }
+        
+        a.link {
+            font-size: 1.1em;
+            text-decoration: none;
+        }
+        
+        a.link:hover {
+            text-shadow: 1px 1px 1px rgb(130, 132, 223);
+        }
+        
+        i.star:hover {
+            color: blue;
+        }
+    </style>
+
+    <header class="container-fluid mt-1" style="background-color: #000000;">
+        <nav class="navbar " style="background-color: #000000; ">
+            <ul class="nav">
+                <li class="nav-item d-flex ">
+                    <a id="leaf" class="nav-link " th:href="@{/}"><i style="color: rgb(49, 102, 49);"
+                            class="fa fa-leaf fa-2x" aria-hidden="true"></i></a>
+                    <h1 id="header">Veggie</h1>
+                </li>
+                <div class="dropdown show m-3">
+                    <a class="btn btn-outline-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <strong> More</strong>
+                    </a>
+
+                    <div class="dropdown-menu p-3 text-start" aria-labelledby="dropdownMenuLink" style="width: 13em;">
+                        <!-- <th:block th:each="type: ${T(com.gft.mvc.models.entities.enums.MealType).values()}">
+                            <i class="fas fa-hand-point-right m-1"></i>
+                            <a class="link" th:href="@{'/recipes/types/'+${type}}" th:value="${type}" th:text="${type.name}"></a>
+                            <br>
+                        </th:block> -->
+
+                    </div>
+                </div>
+            </ul>
+
+            <div class="container-fluid d-flex justify-content-end col">
+
+                <!-- <nav class="navbar" th:switch="${loggedUserRole}">
+
+                    <ul class="nav" th:case="'ADMIN'">
+                        <li class="nav-item"><a class="nav-link" th:href="@{/auth/admin/highlight}"><i class="fa fa-star m-1 text-warning" aria-hidden="true"></i>Highlighted</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Recipes</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/recipes/show}"><i
+                                            class="fa fa-search m-1"></i>Check Recipes</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/recipes/create}"><i
+                                            class="fa fa-plus-square m-1"></i> New Recipe</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ingredients</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/ingredients/show}"><i
+                                            class="fa fa-search m-1"></i>Check Ingredients</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/ingredients/create}"><i
+                                            class="fa fa-plus-square m-1"></i> New Ingredient</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Measures</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/measures/show}"><i
+                                            class="fa fa-search m-1"></i>Check Measures</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" th:href="@{/auth/admin/measures/create}"><i
+                                            class="fa fa-plus-square m-1"></i> New Measure</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item text-center">
+                                    <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-power-off"
+                                            aria-hidden="true"></i>
+                                        Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav> -->
+
+                <!-- <nav class="navbar d-flex justify-content-end m-2" th:switch="${loggedUserRole}"> -->
+                <nav class="navbar d-flex justify-content-end m-2">
+                    <!-- <ul class="nav" th:case="'USER'"> -->
+                    <ul class="nav">
+
+                        <li class="nav-item dropdown">
+                            <a class="btn nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item text-center">
+                                    <a class="dropdown-item" th:href="@{/auth/user/profile}"><i class="fa fa-user"
+                                            aria-hidden="true"></i>
+                                        Profile</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="dropdown-item" th:href="@{/auth/user/favorites}"><i class="fa fa-star" aria-hidden="true"></i>
+                                        Favorites</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-power-off"
+                                            aria-hidden="true"></i>
+                                        Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- <ul class="nav" th:case="'GUEST'"> -->
+                    <!-- <ul class="nav" th:case="'GUEST'">
+                        <li class="nav-item"></li>
+                        <li class="nav-item"><a class="btn btn-outline-warning nav-link text-warning m-2" th:href="@{/login}">Login</a></li>
+                    </ul> -->
+
+                </nav>
+
+                <div>
+                    <form method="get" th:action="@{/{recipe}}">
+                        <div class="input-group">
+                            <input name="recipe" type="text" class="form-control rounded mr-2" placeholder="Find a Recipe" />
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+</div>

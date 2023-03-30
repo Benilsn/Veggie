@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body>
+
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="vh-100 mt-5">
+        <div class="container-fluid">
+
+            <div class="row d-flex justify-content-center">
+
+                <div class="img col-md-9 col-lg-6 m-3">
+                    <img th:src="@{/plant-based-logo.jpg}" class="img-fluid img-thumbnail" alt="Sample image">
+                </div>
+
+                <div class="col-md-8 col-lg-6 col-xl-4 mt-5">
+
+                    <div class="alert alert-success d-flex justify-content-center mt-2" th:if="${message}" th:text="${message}"></div>
+
+                    <form class="form-group container" method="post" th:action="@{/login}">
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email"><strong>E-mail:</strong></label>
+                            <input name="email" type="email" id="email" class="form-control form-control-lg" placeholder="Enter a valid email address" />
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="password"><strong>Password:</strong></label>
+                            <input name="password" type="password" id="password" class="form-control form-control-lg" placeholder="Enter password" />
+                        </div>
+                        <div class="alert alert-danger d-flex justify-content-center mt-2" th:if="${error}" th:text="${error}"></div>
+                        <div class="alert alert-success d-flex justify-content-center mt-2" th:if="${logout}" th:text="${logout}"></div>
+
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="form-check mb-0">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="rememberMe" />
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="#!" class="text-body">Forgot password?</a>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="submit" class="btn btn-success btn-lg">Login</button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/register}" class="link-danger">Register</a></p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>
