@@ -15,38 +15,39 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        @Bean
+        public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 
-        AuthenticationManagerBuilder authenticationManagerBuilder = http
-                .getSharedObject(AuthenticationManagerBuilder.class);
-        // authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(encoder());
-        authenticationManagerBuilder.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("123"))
-                .roles("USER");
-        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
-        return authenticationManager;
-    }
+                AuthenticationManagerBuilder authenticationManagerBuilder = http
+                                .getSharedObject(AuthenticationManagerBuilder.class);
+                // authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(encoder());
+                authenticationManagerBuilder.inMemoryAuthentication().withUser("user")
+                                .password(passwordEncoder().encode("123"))
+                                .roles("USER");
+                AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
+                return authenticationManager;
+        }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login").permitAll()
-                .and()
-                .authenticationManager(authenticationManager(http));
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                // .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                                // .requestMatchers("/admin/**").hasRole("ADMIN")
+                                // .requestMatchers("/**").hasRole("USER"))
+                                .authorizeHttpRequests().anyRequest().permitAll().and()
+                                .authenticationManager(authenticationManager(http))
+                                .formLogin()
+                                .loginPage("/login").and()
+                                .logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                                .permitAll()
+                                                .logoutSuccessUrl("/login"))
+                                .csrf().disable().headers().frameOptions().disable();
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+                return http.build();
+        }
 
-        return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 }

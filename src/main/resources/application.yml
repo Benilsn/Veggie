@@ -1,0 +1,11 @@
+server:
+  port: ${PORT:8080}
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /auth/admin/h2
+  datasource:
+    url: jdbc:h2:mem:veggie
+    username: admin
+    passowrd:
