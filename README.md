@@ -1,13 +1,13 @@
 # Veggie - Site de Receitas Veganas!
 
 ## Ferramentas utilizadas:
->Desenvolvido no VSCODE;
+>Desenvolvido no VSCODE,
 <br>
-Banco de dados: H2;
+>Banco de dados: H2,
 <br>
-Java 17;
+>Java 17,
 <br>
-JUnit 5.
+>JUnit 5.
 <br>
 
 <br>
@@ -17,17 +17,19 @@ JUnit 5.
 ## Dependencias:
 >Spring Web,
 <br>
-Spring Jpa,
+>Spring Jpa,
 <br>
-Spring Security 6,
+>Spring Security 6,
 <br>
-Thymeleaf,
+>Thymeleaf,
 <br>
-DevTools,
+>DevTools,
 <br>
-Lombok,
+>Lombok,
 <br>
-H2.
+>H2,
+<br>
+>ModelMapper.
 <br>
 
 
