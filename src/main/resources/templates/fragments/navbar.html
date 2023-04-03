@@ -59,11 +59,12 @@
                 </div>
             </ul>
 
-            <div class="container-fluid d-flex justify-content-end col">
+            <div class="container-fluid d-flex justify-content-end col" sec:authorize="isAuthenticated()">
 
-                <!-- <nav class="navbar" th:switch="${loggedUserRole}">
+                <!-- ADMIN SECTION -->
+                <nav class="navbar" sec:authorize="hasRole('ROLE_ADMIN')">
 
-                    <ul class="nav" th:case="'ADMIN'">
+                    <ul class="nav">
                         <li class="nav-item"><a class="nav-link" th:href="@{/auth/admin/highlight}"><i class="fa fa-star m-1 text-warning" aria-hidden="true"></i>Highlighted</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Recipes</a>
@@ -81,55 +82,12 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ingredients</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" th:href="@{/auth/admin/ingredients/show}"><i
-                                            class="fa fa-search m-1"></i>Check Ingredients</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" th:href="@{/auth/admin/ingredients/create}"><i
-                                            class="fa fa-plus-square m-1"></i> New Ingredient</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Measures</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" th:href="@{/auth/admin/measures/show}"><i
-                                            class="fa fa-search m-1"></i>Check Measures</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" th:href="@{/auth/admin/measures/create}"><i
-                                            class="fa fa-plus-square m-1"></i> New Measure</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li class="nav-item text-center">
-                                    <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-power-off"
-                                            aria-hidden="true"></i>
-                                        Logout</a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
-                </nav> -->
+                </nav>
+                <!-- END ADMIN SECTION -->
 
-                <!-- <nav class="navbar d-flex justify-content-end m-2" th:switch="${loggedUserRole}"> -->
+
                 <nav class="navbar d-flex justify-content-end m-2">
-                    <!-- <ul class="nav" th:case="'USER'"> -->
                     <ul class="nav">
 
                         <li class="nav-item dropdown">
@@ -158,23 +116,16 @@
                             </ul>
                         </li>
                     </ul>
-
-                    <!-- <ul class="nav" th:case="'GUEST'"> -->
-                    <!-- <ul class="nav" th:case="'GUEST'">
-                        <li class="nav-item"></li>
-                        <li class="nav-item"><a class="btn btn-outline-warning nav-link text-warning m-2" th:href="@{/login}">Login</a></li>
-                    </ul> -->
-
                 </nav>
+            </div>
 
-                <div>
-                    <form method="get" th:action="@{/{recipe}}">
-                        <div class="input-group">
-                            <input name="recipe" type="text" class="form-control rounded mr-2" placeholder="Find a Recipe" />
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </div>
-                    </form>
-                </div>
+            <div>
+                <form method="get" th:action="@{/{recipe}}">
+                    <div class="input-group">
+                        <input name="recipe" type="text" class="form-control rounded mr-2" placeholder="Find a Recipe" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </div>
+                </form>
             </div>
         </nav>
 

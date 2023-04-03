@@ -8,9 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import br.com.veggierecipes.veggierecipes.models.Role;
-import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.repositories.UserRepository;
 
 @Service
@@ -43,7 +42,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(br.com.veggierecipes.veggierecipes.models.User user) {
-        user.setRole(Role.USER);
+        user.setRole(new SimpleGrantedAuthority("USER"));
         user.setIsEnabled(true);
         user.setImage_address("photoless.jpg");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
