@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column
-    private GrantedAuthority role;
+    private Role role;
 
     @Column
     private String image_address;

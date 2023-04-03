@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -18,22 +17,18 @@ import br.com.veggierecipes.veggierecipes.services.UserService;
 @EnableWebSecurity
 public class SecurityConfig {
 
+        @Autowired
         private UserService userService;
 
-        @Bean
-        public UserService getService() {
-                return new UserService(passwordEncoder());
-        }
+        @Autowired
+        private PasswordEncoder encoder;
 
         @Bean
         public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 
                 AuthenticationManagerBuilder authenticationManagerBuilder = http
                                 .getSharedObject(AuthenticationManagerBuilder.class);
-                authenticationManagerBuilder.userDetailsService(getService()).passwordEncoder(passwordEncoder());
-                // authenticationManagerBuilder.inMemoryAuthentication().withUser("user")
-                // .password(passwordEncoder().encode("123"))
-                // .roles("USER");
+                authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(encoder);
                 AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
                 return authenticationManager;
         }
@@ -41,23 +36,19 @@ public class SecurityConfig {
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
-                                // .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                                // .requestMatchers("/admin/**").hasRole("ADMIN")
-                                // .requestMatchers("/**").hasRole("USER"))
+                                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+                                                // .requestMatchers("/admin/**").hasRole("ADMIN")
+                                                .requestMatchers("/", "/login", "/register").permitAll())
                                 .authorizeHttpRequests().anyRequest().permitAll().and()
                                 .authenticationManager(authenticationManager(http))
                                 .formLogin()
-                                .loginPage("/login").and()
+                                .loginPage("/login").usernameParameter("email").defaultSuccessUrl("/").and()
                                 .logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                                 .permitAll()
-                                                .logoutSuccessUrl("/login"))
+                                                .logoutSuccessUrl("/login?logout"))
                                 .csrf().disable().headers().frameOptions().disable();
 
                 return http.build();
         }
 
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-                return new BCryptPasswordEncoder();
-        }
 }

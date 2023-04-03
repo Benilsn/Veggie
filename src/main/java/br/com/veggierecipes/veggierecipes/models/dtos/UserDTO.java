@@ -1,7 +1,6 @@
 package br.com.veggierecipes.veggierecipes.models.dtos;
 
-import org.springframework.security.core.GrantedAuthority;
-
+import br.com.veggierecipes.veggierecipes.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,6 @@ public class UserDTO {
     private String name;
     private String email;
     private String password;
-    private GrantedAuthority role;
+    private Role role;
     private String image_address;
 }
