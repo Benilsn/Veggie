@@ -1,11 +1,14 @@
 package br.com.veggierecipes.veggierecipes.controllers;
 
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
 import br.com.veggierecipes.veggierecipes.services.UserService;
+import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -26,6 +30,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("pageTitle", "Home | Veggie");
         return "index";
     }
 
@@ -34,6 +39,7 @@ public class HomeController {
             @RequestParam(name = "error", required = false) String error,
             @RequestParam(name = "logout", required = false) String logout) {
 
+        model.addAttribute("pageTitle", "Login | Veggie");
         if (error != null) {
             model.addAttribute("error", "Invalid Credentials!");
         }
@@ -47,6 +53,7 @@ public class HomeController {
 
     @GetMapping("/register")
     public String registerPage(Model model) {
+        model.addAttribute("pageTitle", "Register | Veggie");
         model.addAttribute("newUser", new UserDTO());
 
         return "register";
@@ -54,6 +61,13 @@ public class HomeController {
 
     @PostMapping("/user/save")
     public String saveUser(UserDTO newUser, RedirectAttributes ra, BindingResult result, Model model) {
+
+        System.out.println("ERROR COUNT ---->" + result.getErrorCount());
+        if (result.hasErrors()) {
+            model.addAttribute("errors",
+                    result.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList()));
+            return "redirect:/register";
+        }
 
         User user = mapper.map(newUser, User.class);
         ra.addFlashAttribute("message", "Welcome! Your account was created!\nPlease check your e-mail!");
