@@ -19,5 +19,17 @@
 >Lombok,<br>
 >H2,<br>
 >ModelMapper.<br>
+>Spring Validation.<br>
+
+<br>
+<br>
 
 
+# Pagina de login:
+<img src="src\main\resources\static\docs\login-screen.png"></img>
+
+<br>
+<br>
+
+# Pagina de registro:
+<img src="src\main\resources\static\docs\register-screen.png"></img>

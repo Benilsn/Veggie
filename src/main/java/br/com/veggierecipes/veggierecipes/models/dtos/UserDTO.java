@@ -1,7 +1,6 @@
 package br.com.veggierecipes.veggierecipes.models.dtos;
 
 import org.springframework.security.core.GrantedAuthority;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

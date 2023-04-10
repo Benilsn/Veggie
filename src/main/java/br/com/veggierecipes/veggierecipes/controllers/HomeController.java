@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.veggierecipes.exception.EmailAlreadyRegisteredException;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
 import br.com.veggierecipes.veggierecipes.services.UserService;
@@ -60,18 +61,24 @@ public class HomeController {
     }
 
     @PostMapping("/user/save")
-    public String saveUser(UserDTO newUser, RedirectAttributes ra, BindingResult result, Model model) {
+    public String saveUser(@Valid UserDTO newUser, BindingResult result, Model model, RedirectAttributes ra) {
 
-        System.out.println("ERROR COUNT ---->" + result.getErrorCount());
         if (result.hasErrors()) {
-            model.addAttribute("errors",
+
+            ra.addFlashAttribute("errors",
                     result.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList()));
             return "redirect:/register";
         }
 
-        User user = mapper.map(newUser, User.class);
-        ra.addFlashAttribute("message", "Welcome! Your account was created!\nPlease check your e-mail!");
-        userService.save(user);
+        try {
+            User user = mapper.map(newUser, User.class);
+            ra.addFlashAttribute("message", "Welcome! Your account was created!\nPlease check your e-mail!");
+            userService.save(user);
+
+        } catch (EmailAlreadyRegisteredException e) {
+            ra.addFlashAttribute("emailTaken", "E-mail already taken!");
+            return "redirect:/register";
+        }
 
         return "redirect:/login";
     }
