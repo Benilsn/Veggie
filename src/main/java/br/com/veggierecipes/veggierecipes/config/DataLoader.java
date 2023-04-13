@@ -7,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import br.com.veggierecipes.veggierecipes.models.Role;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.repositories.UserRepository;
 
