@@ -8,48 +8,75 @@
 
     <div class="alert alert-success d-flex justify-content-center mt-2" th:if="${message}" th:text="${message}"></div>
 
-
     <div class="form-group-sm container border mt-5 mb-5">
-        <div class="d-flex justify-content-center m-2"><img th:src="@{./icons8-recipe-64.png}">
+        <div class="d-flex justify-content-center m-2">
+            <img th:src="@{/icons8-recipe-64.png}" />
             <h3 class="h2 mt-3">New Recipe</h3>
         </div>
 
         <form method="post" th:action="@{/admin/recipes/save}" enctype="multipart/form-data" th:object="${newRecipe}">
             <div class="container">
-
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="name" class="label"><strong>Name:</strong></label>
-                        <input th:field="*{name}" placeholder="Recipe name" id="name" class="form-control" type="text">
+                        <input th:field="*{name}" placeholder="Recipe name" id="name" class="form-control" type="text" />
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label for="prep_time" class="label"><strong>Prep. time:</strong></label>
-                        <input th:field="*{preparationTime}" placeholder="Minutes" id="prep_time" class="form-control" type="number">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="salary"><strong>Meal type:</strong></label>
+                        <label for="prep_time" class="label"><strong>Prep. time:</strong></label
+              >
+              <input
+                th:field="*{preparationTime}"
+                placeholder="Minutes"
+                id="prep_time"
+                class="form-control"
+                type="number"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="salary"><strong>Meal type:</strong></label>
                         <select class="form-select" th:field="*{type}">
-                            <option th:each="type: ${T(br.com.veggierecipes.veggierecipes.models.enums.MealType).values()}"
-                                th:value="${type}" th:text="${type.name}"></option>
-                        </select>
+                <option
+                  th:each="type: ${T(br.com.veggierecipes.veggierecipes.models.enums.MealType).values()}"
+                  th:value="${type}"
+                  th:text="${type.name}"
+                ></option>
+              </select>
                     </div>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="preparation_mode"><strong>Preparation mode:</strong></label>
-                    <textarea class="form-control" id="preparation_mode" rows="5" th:field="*{preparationMode}"></textarea>
-                </div>
+                    <label for="preparation_mode"><strong>Preparation mode:</strong></label
+            >
+            <textarea
+              class="form-control"
+              id="preparation_mode"
+              rows="5"
+              th:field="*{preparationMode}"
+            ></textarea>
+          </div>
 
-                <div class="form-group mt-2">
-                    <label for="description"><strong>Description:</strong></label>
+          <div class="form-group mt-2">
+            <label for="description"><strong>Description:</strong></label>
                     <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
                 </div>
 
-                <div class="form-froup m-3">
+                <div class="form-group my-4" id="ingredientFields">
+                    <label for="ingredients">Ingredients:</label>
+
+                    <div id="ingredients" th:field="*{ingredients}">
+                        <div class="ingredient">
+                            <input type="text" class="amount" name="amount" placeholder="Amount" />
+                            <input type="text" class="name" name="name" placeholder="Ingredient Name" />
+                            <button type="button" id="addIngredient">Add Ingredient</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-froup my-4">
                     <label for="image"><strong>Recipe's image:</strong></label>
-                    <input type="file" name="image" id="image">
-                    <hr>
+                    <input type="file" name="image" id="image" />
+                    <hr />
                 </div>
 
                 <div th:if="${errors}">
@@ -65,7 +92,41 @@
     </div>
 </body>
 
-<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script>
+    document
+        .getElementById("addIngredient")
+        .addEventListener("click", function() {
+            var ingredientDiv = document.createElement("div");
+            ingredientDiv.classList.add("ingredient");
 
+            var amountInput = document.createElement("input");
+            amountInput.type = "text";
+            amountInput.classList.add("amount");
+            amountInput.name = "amount";
+            amountInput.placeholder = "Amount";
+
+            var nameInput = document.createElement("input");
+            nameInput.type = "text";
+            nameInput.classList.add("name");
+            nameInput.name = "name";
+            nameInput.placeholder = "Ingredient Name";
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "";
+            deleteButton.type = "button";
+            deleteButton.onclick = function() {
+                var parent = deleteButton.parentNode;
+                parent.parentNode.removeChild(parent);
+            }
+
+            ingredientDiv.appendChild(amountInput);
+            ingredientDiv.appendChild(nameInput);
+            ingredientDiv.appendChild(deleteButton);
+
+            document.getElementById("ingredients").appendChild(ingredientDiv);
+        });
+</script>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </html>

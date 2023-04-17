@@ -1,10 +1,12 @@
 package br.com.veggierecipes.veggierecipes.models;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.veggierecipes.veggierecipes.models.enums.MealType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -43,6 +45,9 @@ public class Recipe {
 
     @Column(name = "image_address")
     private String image_address;
+
+    @ElementCollection
+    private Map<Integer, String> ingredients;
 
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = Comments.class)
     @Column(name = "comments")

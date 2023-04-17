@@ -1,6 +1,7 @@
 package br.com.veggierecipes.veggierecipes.models.dtos;
 
 import java.util.List;
+import java.util.Map;
 
 import br.com.veggierecipes.veggierecipes.models.Comments;
 import br.com.veggierecipes.veggierecipes.models.Rating;
@@ -21,6 +22,7 @@ public class RecipeDTO {
     private String description;
     private MealType type;
     private String image_address;
+    private Map<Integer, String> ingredients;
     private List<Comments> comments;
     private List<Rating> rating;
 }

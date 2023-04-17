@@ -44,6 +44,7 @@ public class AdminController {
             RedirectAttributes ra,
             @PathVariable(name = "image", required = false) MultipartFile image) {
 
+        System.out.println("Ingredients -----> " + recipe.getIngredients());
         if (result.hasErrors()) {
             ra.addFlashAttribute("errors",
                     result.getFieldErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList()));
