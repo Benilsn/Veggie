@@ -46,9 +46,6 @@ public class Recipe {
     @Column(name = "image_address")
     private String image_address;
 
-    @ElementCollection
-    private Map<Integer, String> ingredients;
-
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = Comments.class)
     @Column(name = "comments")
     private List<Comments> comments;

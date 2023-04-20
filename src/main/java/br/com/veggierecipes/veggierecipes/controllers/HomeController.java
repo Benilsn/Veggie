@@ -10,13 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.veggierecipes.exception.EmailAlreadyRegisteredException;
 import br.com.veggierecipes.veggierecipes.models.User;
+import br.com.veggierecipes.veggierecipes.models.dtos.RecipeDTO;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
+import br.com.veggierecipes.veggierecipes.services.RecipeService;
 import br.com.veggierecipes.veggierecipes.services.UserService;
 import jakarta.validation.Valid;
 
@@ -27,12 +30,38 @@ public class HomeController {
     private UserService userService;
 
     @Autowired
+    private RecipeService recipeService;
+
+    @Autowired
     private ModelMapper mapper;
 
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("pageTitle", "Home | Veggie");
+
+        var initialPageRecipes = recipeService.getAll()
+                .stream()
+                .map(r -> mapper.map(r, RecipeDTO.class))
+                .limit(10)
+                .collect(Collectors.toList());
+
+        model.addAttribute("initialPageRecipes", initialPageRecipes);
+
         return "index";
+    }
+
+    @GetMapping("/recipes/{id}")
+    public String getById(@PathVariable("id") Long id, Model model) {
+
+        try {
+            var recipe = recipeService.getById(id);
+            model.addAttribute("pageTitle", recipe.getName() + " | Veggie");
+            model.addAttribute("recipe", recipe);
+        } catch (Exception e) {
+
+        }
+
+        return "recipe-by-id";
     }
 
     @GetMapping("/login")

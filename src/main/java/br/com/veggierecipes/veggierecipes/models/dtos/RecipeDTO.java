@@ -22,7 +22,6 @@ public class RecipeDTO {
     private String description;
     private MealType type;
     private String image_address;
-    private Map<Integer, String> ingredients;
     private List<Comments> comments;
     private List<Rating> rating;
 }

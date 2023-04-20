@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +23,10 @@ public class RecipeService {
     public Recipe create(Recipe recipe, MultipartFile image) {
         if (image != null) {
             saveImage(image);
+            recipe.setImage_address(image.getOriginalFilename());
+        } else {
+            recipe.setImage_address("photoless.jpg");
         }
-        recipe.setImage_address(image.getOriginalFilename());
         return recipeRepository.save(recipe);
     }
 
@@ -36,5 +40,13 @@ public class RecipeService {
         } catch (IOException e) {
 
         }
+    }
+
+    public List<Recipe> getAll() {
+        return recipeRepository.findAll();
+    }
+
+    public Recipe getById(Long id) throws Exception {
+        return recipeRepository.findById(id).orElseThrow(() -> new Exception("Recipe not found!"));
     }
 }

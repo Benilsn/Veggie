@@ -1,5 +1,6 @@
 package br.com.veggierecipes.veggierecipes.controllers;
 
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -33,7 +34,7 @@ public class AdminController {
     public String home(Model model) {
         model.addAttribute("pageTitle", "New Recipe | Veggie");
 
-        model.addAttribute("newRecipe", new Recipe());
+        model.addAttribute("newRecipe", new RecipeDTO());
         return "admin/create-recipe";
     }
 
@@ -44,7 +45,6 @@ public class AdminController {
             RedirectAttributes ra,
             @PathVariable(name = "image", required = false) MultipartFile image) {
 
-        System.out.println("Ingredients -----> " + recipe.getIngredients());
         if (result.hasErrors()) {
             ra.addFlashAttribute("errors",
                     result.getFieldErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList()));

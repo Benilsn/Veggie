@@ -60,19 +60,6 @@
             <label for="description"><strong>Description:</strong></label>
                     <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
                 </div>
-
-                <div class="form-group my-4" id="ingredientFields">
-                    <label for="ingredients">Ingredients:</label>
-
-                    <div id="ingredients" th:field="*{ingredients}">
-                        <div class="ingredient">
-                            <input type="text" class="amount" name="amount" placeholder="Amount" />
-                            <input type="text" class="name" name="name" placeholder="Ingredient Name" />
-                            <button type="button" id="addIngredient">Add Ingredient</button>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="form-froup my-4">
                     <label for="image"><strong>Recipe's image:</strong></label>
                     <input type="file" name="image" id="image" />

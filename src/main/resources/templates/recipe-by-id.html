@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/head :: head}"></head>
+
+<style>
+    input[type=checkbox]:checked+label.box {
+        text-decoration: line-through;
+    }
+</style>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageDelete}">
+        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+        <strong class="mx-2">Info!</strong> Deleted form your favorites!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="alert alert-success alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageAdd}">
+        <i class="fa fa-check-circle" aria-hidden="true"></i>
+        <strong class="mx-2">Success!</strong> Added to your <a class="m-1" th:href="@{/auth/user/favorites}">Favorites!</a>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+
+    <div class="container-fluid mt-5 d-flex justify-content-center mb-5">
+
+        <div class="card-deck row" style="width:70em;">
+
+            <div class="card col">
+                <div class="card-body">
+                    <br>
+                    <label class="h3 mb-3" for=""><strong>Preparation Time: [[${recipe.preparationTime}]]
+                            minutes.</strong></label>
+                    <hr>
+                    <label class="h3 mb-3"><strong>Ingredients:</strong></label>
+
+                    <!-- <ul class="navbar-nav">
+                        <li th:each="Ingredient : ${recipe.Ingredients}">
+                            <div class="d-flex">
+                                <input class="m-1" type="checkbox" th:id="*{Ingredient.id}">
+                                <label class="box m-1" th:for="*{Ingredient.id}" th:text="*{Ingredient.name}"></label>
+                            </div>
+                        </li>
+                    </ul> -->
+
+                    <hr>
+                    <label class="h3 m-3" for=""><strong>Preparation mode:</strong></label>
+                    <p class="card-text m-3" th:text="${recipe.preparationMode}"></p>
+                    <!-- <th:block th:each="prep : ${preparationMode}">
+                        <ul>
+                            <li th:text="${prep}"></li>
+                        </ul>
+                    </th:block> -->
+                </div>
+            </div>
+
+            <div class="card col text-center">
+                <div class="d-flex justify-content-center m-3">
+                    <h2 class="card-title text-center m-2" th:text="${recipe.name}"></h2>
+
+                    <!-- <div th:if="${#strings.equals(loggedUserRole, 'USER')}">
+                        <a class="star" th:href="@{'/auth/user/favorites/save/'+*{recipe.id}}" style="color: yellow;"><i
+                                class="fa fa-star fa-3x star" aria-hidden="true"></i></a>
+                    </div> -->
+
+                </div>
+                <hr>
+
+                <h3>Description:</h3>
+                <p class="card-text m-3" th:text="${recipe.description}"></p>
+                <img class="card-img mt-2" th:src="@{'/recipes/'+plant-based-logo.jpg}" alt="Card image cap" style="height:500px; width:500px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- <div th:replace="~{fragments/comments :: comments}"></div> -->
+
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>

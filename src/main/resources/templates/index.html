@@ -51,10 +51,10 @@
                     </div>
                 </div>
 
-                <!-- <th:block th:each="recipe : ${initialPageRecipes}">
+                <th:block th:each="recipe : ${initialPageRecipes}">
                     <div class="card col-md-3 m-1 grow d-flex justify-content-center align-items-center" style="width: 25em; ">
                         <a th:href="@{'/recipes/'+*{recipe.id}}">
-                            <img class="card-img-top mt-3" th:src="@{'/img/recipes/'+*{recipe.image}}" alt="Card image cap">
+                            <img class="card-img-top mt-3" th:src="@{'/recipes/'+*{recipe.image_address}}" alt="Card image cap">
                         </a>
                         <div class="card-body">
                             <a class="text-dark link" th:href="@{'/recipes/'+*{recipe.id}}" style="text-decoration: none;">
@@ -63,11 +63,11 @@
                             </a>
 
                             <div class="d-flex justify-content-end mt-2">
-                                <p class="card-text"><small class="text-muted" th:text="${recipe.mealType.name}"></small></p>
+                                <p class="card-text"><small class="text-muted" th:text="${recipe.type.name}"></small></p>
                             </div>
                         </div>
                     </div>
-                </th:block> -->
+                </th:block>
 
             </div>
 
