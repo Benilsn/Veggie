@@ -19,6 +19,7 @@ import br.com.veggierecipes.exception.EmailAlreadyRegisteredException;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.dtos.RecipeDTO;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
+import br.com.veggierecipes.veggierecipes.models.enums.MealType;
 import br.com.veggierecipes.veggierecipes.services.RecipeService;
 import br.com.veggierecipes.veggierecipes.services.UserService;
 import jakarta.validation.Valid;
@@ -110,5 +111,16 @@ public class HomeController {
         }
 
         return "redirect:/login";
+    }
+
+    @GetMapping("/recipes/types/{type}")
+    public String getByType(@PathVariable("type") MealType type, Model model) {
+
+        var listOfRecipes = recipeService.getByType(type);
+
+        model.addAttribute("pageTitle", type.getName() + " | Veggie");
+        model.addAttribute("listOfRecipes", listOfRecipes);
+
+        return "find-by-type";
     }
 }

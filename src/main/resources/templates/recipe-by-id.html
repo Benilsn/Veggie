@@ -71,7 +71,7 @@
 
                 <h3>Description:</h3>
                 <p class="card-text m-3" th:text="${recipe.description}"></p>
-                <img class="card-img mt-2" th:src="@{'/recipes/'+plant-based-logo.jpg}" alt="Card image cap" style="height:500px; width:500px;">
+                <img class="card-img mt-2" th:src="@{'/img/recipes/'+*{recipe.image_address}}" alt="Card image cap" style="height:500px; width:500px;">
             </div>
         </div>
     </div>

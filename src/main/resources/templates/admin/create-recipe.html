@@ -10,7 +10,7 @@
 
     <div class="form-group-sm container border mt-5 mb-5">
         <div class="d-flex justify-content-center m-2">
-            <img th:src="@{/icons8-recipe-64.png}" />
+            <img th:src="@{/img/icons8-recipe-64.png}" />
             <h3 class="h2 mt-3">New Recipe</h3>
         </div>
 
@@ -31,6 +31,7 @@
                 id="prep_time"
                 class="form-control"
                 type="number"
+                
               />
             </div>
             <div class="form-group col-md-4">
@@ -53,6 +54,7 @@
               id="preparation_mode"
               rows="5"
               th:field="*{preparationMode}"
+              
             ></textarea>
           </div>
 

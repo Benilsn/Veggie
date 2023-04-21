@@ -1,6 +1,5 @@
 package br.com.veggierecipes.veggierecipes.controllers;
 
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -43,7 +42,7 @@ public class AdminController {
             @Valid RecipeDTO recipe,
             BindingResult result,
             RedirectAttributes ra,
-            @PathVariable(name = "image", required = false) MultipartFile image) {
+            @PathVariable(name = "image", required = false) MultipartFile image) throws Exception {
 
         if (result.hasErrors()) {
             ra.addFlashAttribute("errors",
@@ -57,24 +56,51 @@ public class AdminController {
                 recipeService.create(mapper.map(recipe, Recipe.class), image);
 
             } else {
-                // var recipeToUpdate = recipeService.getById(recipe.getId());
+                var recipeToUpdate = recipeService.getById(recipe.getId());
 
-                // recipeToUpdate.setName(recipe.getName());
-                // recipeToUpdate.setPreparationTime(recipe.getPreparationTime());
-                // recipeToUpdate.setMealType(recipe.getMealType());
-                // recipeToUpdate.setPreparationMode(recipe.getPreparationMode());
-                // recipeToUpdate.setDescription(recipe.getDescription());
-                // recipeToUpdate.setIngredients(recipe.getIngredients());
-                // if (image != null) {
-                // recipeToUpdate.setImage(image.getOriginalFilename());
-                // }
+                recipeToUpdate.setName(recipe.getName());
+                recipeToUpdate.setPreparationTime(recipe.getPreparationTime());
+                recipeToUpdate.setType(recipe.getType());
+                recipeToUpdate.setPreparationMode(recipe.getPreparationMode());
+                recipeToUpdate.setDescription(recipe.getDescription());
+                if (image.getSize() > 0) {
+                    recipeToUpdate.setImage_address(image.getOriginalFilename());
+                }
 
-                // recipeService.create(recipeToUpdate, image);
+                recipeService.create(recipeToUpdate, image);
 
-                // ra.addFlashAttribute("message", "Recipe Successfully updated!");
-                // return "redirect:/auth/admin/recipes/show";
+                ra.addFlashAttribute("message", "Recipe Successfully updated!");
+                return "redirect:/admin/recipes/show";
             }
         }
         return "redirect:/admin/recipes/create";
+    }
+
+    @GetMapping("/show")
+    public String getIngredients(Model model) {
+        model.addAttribute("pageTitle", "Show Recipes | Veggie");
+        model.addAttribute("listOfRecipes", recipeService.getAll());
+        return "admin/check-recipes";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editRecipe(@PathVariable("id") Long id, Model model) throws Exception {
+
+        var recipeToUpdate = recipeService.getById(id);
+
+        model.addAttribute("pageTitle", "Update Recipe | Veggie");
+        model.addAttribute("recipeToUpdate", recipeToUpdate);
+
+        return "admin/edit";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable("id") Long id, RedirectAttributes ra) throws Exception {
+        var recipeToDelete = recipeService.getById(id);
+        recipeService.deleteById(recipeToDelete.getId());
+
+        ra.addFlashAttribute("message", "Recipe Successfully deleted!");
+
+        return "redirect:/admin/recipes/show";
     }
 }
