@@ -34,9 +34,6 @@ public class Recipe {
     @Column(name = "preparation_time")
     private Integer preparationTime;
 
-    @Column(name = "preparation_mode", length = 2000)
-    private String preparationMode;
-
     @Column(name = "description", length = 2000)
     private String description;
 
@@ -45,6 +42,12 @@ public class Recipe {
 
     @Column(name = "image_address")
     private String image_address;
+
+    @ElementCollection
+    private List<String> preparationMode;
+
+    @ElementCollection
+    private List<String> ingredients;
 
     @ManyToMany(cascade = CascadeType.ALL, targetEntity = Comments.class)
     @Column(name = "comments")

@@ -37,46 +37,41 @@
                     <hr>
                     <label class="h3 mb-3"><strong>Ingredients:</strong></label>
 
-                    <!-- <ul class="navbar-nav">
+                    <ul class="navbar-nav">
                         <li th:each="Ingredient : ${recipe.Ingredients}">
                             <div class="d-flex">
-                                <input class="m-1" type="checkbox" th:id="*{Ingredient.id}">
-                                <label class="box m-1" th:for="*{Ingredient.id}" th:text="*{Ingredient.name}"></label>
+                                <input class="m-1" type="checkbox" th:id="*{Ingredient}">
+                                <label class="box m-1" th:for="*{Ingredient}" th:text="*{Ingredient}"></label>
                             </div>
                         </li>
-                    </ul> -->
+                    </ul>
 
                     <hr>
                     <label class="h3 m-3" for=""><strong>Preparation mode:</strong></label>
-                    <p class="card-text m-3" th:text="${recipe.preparationMode}"></p>
-                    <!-- <th:block th:each="prep : ${preparationMode}">
-                        <ul>
-                            <li th:text="${prep}"></li>
-                        </ul>
-                    </th:block> -->
+                    <ul class="navbar-nav">
+                        <li th:each="prep : ${recipe.preparationMode}">
+                            <div class="d-flex">
+                                <label class="box m-1" th:for="*{prep}" th:text="*{prep}"></label>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
             <div class="card col text-center">
                 <div class="d-flex justify-content-center m-3">
-                    <h2 class="card-title text-center m-2" th:text="${recipe.name}"></h2>
-
-                    <!-- <div th:if="${#strings.equals(loggedUserRole, 'USER')}">
-                        <a class="star" th:href="@{'/auth/user/favorites/save/'+*{recipe.id}}" style="color: yellow;"><i
-                                class="fa fa-star fa-3x star" aria-hidden="true"></i></a>
-                    </div> -->
-
+                    <h2 class="card-title text-center m-2"><strong>[[${recipe.name}]]</strong</h2>
                 </div>
                 <hr>
 
-                <h3>Description:</h3>
-                <p class="card-text m-3" th:text="${recipe.description}"></p>
-                <img class="card-img mt-2" th:src="@{'/img/recipes/'+*{recipe.image_address}}" alt="Card image cap" style="height:500px; width:500px;">
+                <h3><strong>Description:</strong></h3>
+                        <p class="card-text m-3" th:text="${recipe.description}"></p>
+                        <img class="card-img mt-2" th:src="@{'/img/recipes/'+*{recipe.image_address}}" alt="Card image cap" style="height:500px; width:500px;">
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- <div th:replace="~{fragments/comments :: comments}"></div> -->
+        <!-- <div th:replace="~{fragments/comments :: comments}"></div> -->
 
 </body>
 

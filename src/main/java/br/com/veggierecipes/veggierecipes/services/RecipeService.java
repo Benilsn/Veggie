@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import br.com.veggierecipes.utils.Utils;
 import br.com.veggierecipes.veggierecipes.models.Recipe;
 import br.com.veggierecipes.veggierecipes.models.enums.MealType;
 import br.com.veggierecipes.veggierecipes.repositories.RecipeRepository;
@@ -38,11 +39,20 @@ public class RecipeService {
                 recipe.setImage_address(recipe.getImage_address());
             }
         }
+        List<String> mappedMode = Utils.transformToList(recipe.getPreparationMode());
+        recipe.setPreparationMode(mappedMode);
 
+        List<String> mappedIngredients = Utils.transformToList(recipe.getIngredients());
+        recipe.setIngredients(mappedIngredients);
         return recipeRepository.save(recipe);
     }
 
     public Recipe create(Recipe recipe) {
+        List<String> mappedMode = Utils.transformToList(recipe.getPreparationMode());
+        recipe.setPreparationMode(mappedMode);
+
+        List<String> mappedIngredients = Utils.transformToList(recipe.getIngredients());
+        recipe.setIngredients(mappedIngredients);
         return recipeRepository.save(recipe);
     }
 

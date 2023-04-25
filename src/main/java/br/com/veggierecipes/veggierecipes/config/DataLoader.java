@@ -22,6 +22,10 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        createUsers();
+    }
+
+    void createUsers() {
         User admin = new User(null, "Admin", "admin@hotmail.com", encoder.encode("123"),
                 new SimpleGrantedAuthority("ROLE_ADMIN"), null, true);
         User user1 = new User(null, "Joao", "joao.silva@gmail.com", encoder.encode("123"),
@@ -29,6 +33,10 @@ public class DataLoader implements CommandLineRunner {
                 "photoless.jpg", true);
 
         userRepository.saveAll(List.of(admin, user1));
+    }
+
+    void createRecipes() {
+
     }
 
 }

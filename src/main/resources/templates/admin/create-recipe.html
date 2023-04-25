@@ -31,7 +31,6 @@
                 id="prep_time"
                 class="form-control"
                 type="number"
-                
               />
             </div>
             <div class="form-group col-md-4">
@@ -45,6 +44,8 @@
               </select>
                     </div>
                 </div>
+                <label for="ingredients"><strong>Ingredients:</strong></label>
+                <textarea id="ingredients" th:field="*{ingredients}" rows="5" class="form-control numbered-textarea" placeholder="1. Enter ingredient&#10;2. Enter ingredient&#10;3. Enter ingredient&#10;4. Enter ingredient&#10;5. Enter ingredient&#10;" data-number="1"></textarea>
 
                 <div class="form-group mt-2">
                     <label for="preparation_mode"><strong>Preparation mode:</strong></label
@@ -54,7 +55,6 @@
               id="preparation_mode"
               rows="5"
               th:field="*{preparationMode}"
-              
             ></textarea>
           </div>
 
@@ -107,7 +107,7 @@
             deleteButton.onclick = function() {
                 var parent = deleteButton.parentNode;
                 parent.parentNode.removeChild(parent);
-            }
+            };
 
             ingredientDiv.appendChild(amountInput);
             ingredientDiv.appendChild(nameInput);

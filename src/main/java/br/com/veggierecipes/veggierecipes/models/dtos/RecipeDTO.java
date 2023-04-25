@@ -23,13 +23,13 @@ public class RecipeDTO {
     @Min(value = 1, message = "Preparation time: Should be greater than 1!")
     private Integer preparationTime;
 
-    @NotEmpty(message = "Prepararion Mode: Please, insert the preparation mode!")
-    private String preparationMode;
-
     @NotEmpty(message = "Description: Please, insert the description, Ex: ingredients, amount...")
     private String description;
     private MealType type;
     private String image_address;
+
+    private List<String> preparationMode;
+    private List<String> ingredients;
     private List<Comments> comments;
     private List<Rating> rating;
 }
