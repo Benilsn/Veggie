@@ -1,5 +1,6 @@
 package br.com.veggierecipes.veggierecipes.controllers;
 
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -46,6 +47,7 @@ public class HomeController {
                 .limit(10)
                 .collect(Collectors.toList());
 
+        Collections.shuffle(initialPageRecipes);
         model.addAttribute("initialPageRecipes", initialPageRecipes);
 
         return "index";
