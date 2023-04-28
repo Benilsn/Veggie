@@ -57,4 +57,7 @@ public class UserService implements UserDetailsService {
         repository.save(user);
     }
 
+    public br.com.veggierecipes.veggierecipes.models.User getByName(String username) throws Exception {
+        return repository.findByEmail(username).orElseThrow(() -> new Exception("User not found!"));
+    }
 }

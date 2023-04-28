@@ -12,17 +12,17 @@
 <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-    <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageDelete}">
+    <!-- <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageDelete}">
         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
         <strong class="mx-2">Info!</strong> Deleted form your favorites!
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    </div> -->
 
-    <div class="alert alert-success alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageAdd}">
+    <!-- <div class="alert alert-success alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageAdd}">
         <i class="fa fa-check-circle" aria-hidden="true"></i>
         <strong class="mx-2">Success!</strong> Added to your <a class="m-1" th:href="@{/auth/user/favorites}">Favorites!</a>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
+    </div> -->
 
 
     <div class="container-fluid mt-5 d-flex justify-content-center mb-5">
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <!-- <div th:replace="~{fragments/comments :: comments}"></div> -->
+        <div th:replace="~{fragments/comments :: comments}"></div>
 
 </body>
 

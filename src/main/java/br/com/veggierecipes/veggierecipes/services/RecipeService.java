@@ -4,14 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.veggierecipes.utils.Utils;
+import br.com.veggierecipes.veggierecipes.models.Comments;
 import br.com.veggierecipes.veggierecipes.models.Recipe;
+import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.enums.MealType;
+import br.com.veggierecipes.veggierecipes.repositories.CommentsRepository;
 import br.com.veggierecipes.veggierecipes.repositories.RecipeRepository;
 
 @Service
@@ -20,11 +25,21 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private CommentsRepository commentsRepository;
+
     private final String path = System.getProperty("user.dir") + "/src/main/resources/static/img/recipes";
 
     public Recipe create(Recipe recipe, MultipartFile image) {
 
         if (recipe.getId() == null) {
+
+            List<String> mappedMode = Utils.transformToList(recipe.getPreparationMode());
+            recipe.setPreparationMode(mappedMode);
+
+            List<String> mappedIngredients = Utils.transformToList(recipe.getIngredients());
+            recipe.setIngredients(mappedIngredients);
+
             if (image.getSize() > 0) {
                 saveImage(image);
                 recipe.setImage_address(image.getOriginalFilename());
@@ -39,11 +54,7 @@ public class RecipeService {
                 recipe.setImage_address(recipe.getImage_address());
             }
         }
-        List<String> mappedMode = Utils.transformToList(recipe.getPreparationMode());
-        recipe.setPreparationMode(mappedMode);
 
-        List<String> mappedIngredients = Utils.transformToList(recipe.getIngredients());
-        recipe.setIngredients(mappedIngredients);
         return recipeRepository.save(recipe);
     }
 
@@ -78,6 +89,19 @@ public class RecipeService {
 
     public List<Recipe> getByType(MealType type) {
         return recipeRepository.findByType(type);
+    }
+
+    public void saveComment(Long id, Comments comment, User user) throws Exception {
+        Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new Exception("Recipe not found!"));
+
+        comment.setCommentedAt(LocalDate.now());
+        comment.setAuthor_image_address(user.getImage_address());
+        comment.setAuthor_email(user.getEmail());
+        comment.setContent(comment.getContent());
+        comment.setAuthor_name(user.getName());
+        recipe.getComments().add(comment);
+
+        recipeRepository.save(recipe);
     }
 
     // public List<Recipe> searchRecipe(String name) {

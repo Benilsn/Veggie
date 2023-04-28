@@ -4,19 +4,18 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import br.com.veggierecipes.exception.EmailAlreadyRegisteredException;
+import br.com.veggierecipes.veggierecipes.models.Comments;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.dtos.RecipeDTO;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
@@ -60,11 +59,22 @@ public class HomeController {
             var recipe = recipeService.getById(id);
             model.addAttribute("pageTitle", recipe.getName() + " | Veggie");
             model.addAttribute("recipe", recipe);
+            model.addAttribute("comment", new Comments());
         } catch (Exception e) {
 
         }
 
         return "recipe-by-id";
+    }
+
+    @PostMapping("/recipes/{id}")
+    public String saveComment(@PathVariable("id") Long id, Comments comment) throws Exception {
+
+        var loggedUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        var user = userService.getByName(loggedUser);
+
+        recipeService.saveComment(id, comment, user);
+        return "redirect:/recipes/" + id;
     }
 
     @GetMapping("/login")
