@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.veggierecipes.utils.Utils;
 import br.com.veggierecipes.veggierecipes.models.Comments;
+import br.com.veggierecipes.veggierecipes.models.Rating;
 import br.com.veggierecipes.veggierecipes.models.Recipe;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.enums.MealType;
@@ -91,14 +92,19 @@ public class RecipeService {
         return recipeRepository.findByType(type);
     }
 
-    public void saveComment(Long id, Comments comment, User user) throws Exception {
+    public void saveCommentAndRating(Long id, Comments comment, Rating rating, User user) throws Exception {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new Exception("Recipe not found!"));
+        Rating newRating = new Rating();
+        newRating.setRated_by(user.getEmail());
+        newRating.setRated_value(rating.getRated_value());
 
         comment.setCommentedAt(LocalDate.now());
         comment.setAuthor_image_address(user.getImage_address());
         comment.setAuthor_email(user.getEmail());
         comment.setContent(comment.getContent());
         comment.setAuthor_name(user.getName());
+
+        recipe.getRating().add(newRating);
         recipe.getComments().add(comment);
 
         recipeRepository.save(recipe);

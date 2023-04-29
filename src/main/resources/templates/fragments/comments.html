@@ -93,6 +93,35 @@
         .form-group textarea.form-input {
             height: 150px;
         }
+        
+        .rating input[type="radio"] {
+            display: none;
+        }
+        
+        .rating {
+            direction: rtl;
+        }
+        
+        .rating .star {
+            font-size: 24px;
+            color: #ddd;
+        }
+        
+        .rating input[type="radio"] {
+            display: none;
+        }
+        
+        .rating label i {
+            font-size: 24px;
+            color: #ddd;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .rating input[type="radio"]:checked~label i,
+        .rating input[type="radio"]:hover~label i {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
     </style>
 
     <div th:if="${#authorization.expression('!isAuthenticated()')}" class="container">
@@ -122,9 +151,36 @@
                 </div>
             </div>
 
+            <hr class="my-4">
 
             <form class="form-block" method="post" th:action="@{'/recipes/' + ${recipe.id}}" th:if="${#authorization.expression('isAuthenticated()')}">
-                <div class="row ">
+                <div class="form-group text-center">
+                    <label for="star1" class="star-label text-success"><i class="fas fa-leaf"></i> How veggie-tastic was this dish?</label>
+                    <div class="rating m-2">
+                        <input type="radio" id="star5" name="rating" value="5" th:field="*{rating.rated_value}" />
+                        <label for="star5" title="5 stars" class="star-label">
+                            <i class="star fa-5x fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star4" name="rating" value="4" th:field="*{rating.rated_value}" />
+                        <label for="star4" title="4 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star3" name="rating" value="3" th:field="*{rating.rated_value}" />
+                        <label for="star3" title="3 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star2" name="rating" value="2" th:field="*{rating.rated_value}" />
+                        <label for="star2" title="2 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star1" name="rating" value="1" th:field="*{rating.rated_value}" />
+                        <label for="star1" title="1 star" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xs-12 mb-3">
                         <div class="form-group">
                             <textarea class="form-control" th:field="*{comment.content}" required rows="3" placeholder="Leave a Comment"></textarea>
@@ -133,6 +189,7 @@
                     <button class="btn btn-primary">Submit</button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

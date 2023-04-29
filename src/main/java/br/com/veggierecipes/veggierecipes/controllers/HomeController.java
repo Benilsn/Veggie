@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.veggierecipes.exception.EmailAlreadyRegisteredException;
 import br.com.veggierecipes.veggierecipes.models.Comments;
+import br.com.veggierecipes.veggierecipes.models.Rating;
 import br.com.veggierecipes.veggierecipes.models.User;
 import br.com.veggierecipes.veggierecipes.models.dtos.RecipeDTO;
 import br.com.veggierecipes.veggierecipes.models.dtos.UserDTO;
@@ -57,9 +59,25 @@ public class HomeController {
 
         try {
             var recipe = recipeService.getById(id);
+            double recipeAverageRating = 0;
+            int rateAmount = recipe.getRating().size();
+
+            if (recipe.getRating().size() != 0) {
+                recipeAverageRating = recipe.getRating().stream()
+                        .map(r -> {
+                            return r.getRated_value();
+                        })
+                        .collect(Collectors.toList())
+                        .stream().reduce(0, (a, b) -> a + b).doubleValue() / rateAmount;
+            }
+
             model.addAttribute("pageTitle", recipe.getName() + " | Veggie");
             model.addAttribute("recipe", recipe);
             model.addAttribute("comment", new Comments());
+            model.addAttribute("rating", new Rating());
+            model.addAttribute("recipeAverageRating", recipeAverageRating);
+            model.addAttribute("rateAmount", rateAmount);
+
         } catch (Exception e) {
 
         }
@@ -68,12 +86,14 @@ public class HomeController {
     }
 
     @PostMapping("/recipes/{id}")
-    public String saveComment(@PathVariable("id") Long id, Comments comment) throws Exception {
+    public String saveCommentAndRating(@PathVariable("id") Long id, @ModelAttribute("comment") Comments comment,
+            @ModelAttribute("rating") Rating rating)
+            throws Exception {
 
         var loggedUser = SecurityContextHolder.getContext().getAuthentication().getName();
         var user = userService.getByName(loggedUser);
 
-        recipeService.saveComment(id, comment, user);
+        recipeService.saveCommentAndRating(id, comment, rating, user);
         return "redirect:/recipes/" + id;
     }
 

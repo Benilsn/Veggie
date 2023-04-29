@@ -12,18 +12,6 @@
 <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-    <!-- <div class="alert alert-danger alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageDelete}">
-        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-        <strong class="mx-2">Info!</strong> Deleted form your favorites!
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div> -->
-
-    <!-- <div class="alert alert-success alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${messageAdd}">
-        <i class="fa fa-check-circle" aria-hidden="true"></i>
-        <strong class="mx-2">Success!</strong> Added to your <a class="m-1" th:href="@{/auth/user/favorites}">Favorites!</a>
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div> -->
-
 
     <div class="container-fluid mt-5 d-flex justify-content-center mb-5">
 
@@ -62,6 +50,25 @@
                 <div class="d-flex justify-content-center m-3">
                     <h2 class="card-title text-center m-2"><strong>[[${recipe.name}]]</strong</h2>
                 </div>
+            <div class="container-fluid d-flex justify-content-center">
+                <p class="mx-5" style="font-size:25px">[[${recipeAverageRating}]]</p>
+                <span class="rating">
+                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                        <span th:if="${i <= recipeAverageRating}">
+                            <span th:if="${i < recipeAverageRating}">
+                                <span class="fa fa-star checked text-warning"></span>
+                            </span>
+                            <span th:if="${i >= recipeAverageRating}">
+                                <span class="fa fa-star-half checked text-warning"></span>
+                            </span>
+                        </span>
+                        <span th:unless="${i <= recipeAverageRating}">
+                            <span class="fa fa-star text-muted"></span>
+                        </span>
+                    </span>
+                </span>
+                <p class="mx-4">([[${rateAmount}]])</p>
+            </div>
                 <hr>
 
                 <h3><strong>Description:</strong></h3>
