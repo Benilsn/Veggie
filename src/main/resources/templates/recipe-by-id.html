@@ -53,7 +53,7 @@
             <div class="container-fluid d-flex justify-content-center">
                 <p class="mx-5" style="font-size:25px">[[${recipeAverageRating}]]</p>
                 <span class="rating">
-                    <span th:each="i : ${#numbers.sequence(1, 5)}">
+                    <span th:each="i : ${#numbers.sequence(5, 1)}">
                         <span th:if="${i <= recipeAverageRating}">
                             <span th:if="${i < recipeAverageRating}">
                                 <span class="fa fa-star checked text-warning"></span>

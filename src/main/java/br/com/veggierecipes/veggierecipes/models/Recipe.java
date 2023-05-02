@@ -8,6 +8,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +35,8 @@ public class Recipe {
     @Column(name = "preparation_time")
     private Integer preparationTime;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Column(length = 1000)
     private List<String> preparationMode;
 
     @Column(name = "description", length = 2000)

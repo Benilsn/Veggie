@@ -51,10 +51,11 @@
                     <label for="preparation_mode"><strong>Preparation mode:</strong></label
             >
             <textarea
-              class="form-control"
+              class="form-control numbered-textarea"
               id="preparation_mode"
               rows="5"
               th:field="*{preparationMode}"
+              placeholder="1. Step&#10;2. Step&#10;3. Step&#10;4. Step&#10;5. Step&#10;"
             ></textarea>
           </div>
 
@@ -81,41 +82,6 @@
     </div>
 </body>
 
-<script>
-    document
-        .getElementById("addIngredient")
-        .addEventListener("click", function() {
-            var ingredientDiv = document.createElement("div");
-            ingredientDiv.classList.add("ingredient");
-
-            var amountInput = document.createElement("input");
-            amountInput.type = "text";
-            amountInput.classList.add("amount");
-            amountInput.name = "amount";
-            amountInput.placeholder = "Amount";
-
-            var nameInput = document.createElement("input");
-            nameInput.type = "text";
-            nameInput.classList.add("name");
-            nameInput.name = "name";
-            nameInput.placeholder = "Ingredient Name";
-
-            var deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
-            deleteButton.className = "";
-            deleteButton.type = "button";
-            deleteButton.onclick = function() {
-                var parent = deleteButton.parentNode;
-                parent.parentNode.removeChild(parent);
-            };
-
-            ingredientDiv.appendChild(amountInput);
-            ingredientDiv.appendChild(nameInput);
-            ingredientDiv.appendChild(deleteButton);
-
-            document.getElementById("ingredients").appendChild(ingredientDiv);
-        });
-</script>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </html>

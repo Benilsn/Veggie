@@ -12,4 +12,10 @@ import br.com.veggierecipes.veggierecipes.models.enums.MealType;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
     public List<Recipe> findByType(MealType type);
+
+    public List<Recipe> findByNameContains(String name);
+
+    public List<Recipe> findAllByNameContainingIgnoreCase(String name);
+
+    public List<Recipe> findAllByDescriptionContainingIgnoreCase(String name);
 }

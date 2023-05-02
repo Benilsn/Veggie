@@ -155,4 +155,27 @@ public class HomeController {
 
         return "find-by-type";
     }
+
+    @GetMapping("/{recipe}")
+    public String searchRecipe(@RequestParam(name = "recipe") String name, Model model) {
+        model.addAttribute("pageTitle", "Search | Veggie");
+
+        var listOfRecipes = recipeService.getByNameContains(name);
+
+        model.addAttribute("listOfRecipes", listOfRecipes);
+
+        return "search-recipe";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model) throws Exception {
+        model.addAttribute("pageTitle", "My Profile | Veggie");
+
+        var user = mapper.map(
+                userService.getByName(SecurityContextHolder.getContext().getAuthentication().getName()),
+                UserDTO.class);
+
+        model.addAttribute("user", user);
+        return "profile";
+    }
 }

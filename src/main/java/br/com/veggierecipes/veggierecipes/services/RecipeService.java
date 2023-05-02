@@ -6,6 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -92,38 +95,37 @@ public class RecipeService {
         return recipeRepository.findByType(type);
     }
 
-    public void saveCommentAndRating(Long id, Comments comment, Rating rating, User user) throws Exception {
+    public void saveCommentAndRating(Long id, Comments commentContent, Rating rating, User user) throws Exception {
         Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new Exception("Recipe not found!"));
         Rating newRating = new Rating();
         newRating.setRated_by(user.getEmail());
         newRating.setRated_value(rating.getRated_value());
+        recipe.getRating().add(newRating);
 
+        Comments comment = new Comments();
         comment.setCommentedAt(LocalDate.now());
         comment.setAuthor_image_address(user.getImage_address());
         comment.setAuthor_email(user.getEmail());
-        comment.setContent(comment.getContent());
+        comment.setContent(commentContent.getContent());
         comment.setAuthor_name(user.getName());
-
-        recipe.getRating().add(newRating);
         recipe.getComments().add(comment);
 
         recipeRepository.save(recipe);
     }
 
-    // public List<Recipe> searchRecipe(String name) {
-    // return repository.findByNameContains(name);
-    // }
+    public List<Recipe> searchRecipe(String name) {
+        return recipeRepository.findByNameContains(name);
+    }
 
-    // public List<Recipe> getByNameContains(String name) {
+    public List<Recipe> getByNameContains(String name) {
 
-    // var findByName = repository.findAllByNameContainingIgnoreCase(name);
-    // var findByDescription =
-    // repository.findAllByDescriptionContainingIgnoreCase(name);
+        var findByName = recipeRepository.findAllByNameContainingIgnoreCase(name);
+        var findByDescription = recipeRepository.findAllByDescriptionContainingIgnoreCase(name);
 
-    // var list = Stream.concat(findByName.stream(),
-    // findByDescription.stream()).distinct()
-    // .collect(Collectors.toList());
+        var list = Stream.concat(findByName.stream(),
+                findByDescription.stream()).distinct()
+                .collect(Collectors.toList());
 
-    // return list;
-    // }
+        return list;
+    }
 }
