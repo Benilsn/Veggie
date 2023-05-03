@@ -45,7 +45,7 @@ public class HomeController {
         var initialPageRecipes = recipeService.getAll()
                 .stream()
                 .map(r -> mapper.map(r, RecipeDTO.class))
-                .limit(10)
+                .limit(11)
                 .collect(Collectors.toList());
 
         Collections.shuffle(initialPageRecipes);

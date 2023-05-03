@@ -24,6 +24,11 @@
 <br>
 <br>
 
+# Pagina inicial:
+<img src="src\main\resources\static\docs\pagina-inicial.png"></img>
+
+<br>
+<br>
 
 # Pagina de login:
 <img src="src\main\resources\static\docs\login-screen.png"></img>

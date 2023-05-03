@@ -310,243 +310,190 @@ public class DataLoader implements CommandLineRunner {
 
                 recipeService.create(r15);
 
-                // Recipe r16 = new Recipe("Vegan Edible Cookie Dough", 30,
-                // "(1) In a food processor, blend the chickpeas until smooth.;\n" +
-                // "(2) Add oats, maple syrup, peanut butter, and almond extract and blend.;\n"
-                // +
-                // "(3) Transfer to a bowl and add mix-ins. Mix until combined;\n"
-                // +
-                // "(4) Serve in a bowl and enjoy!;\n",
-                // "Smooth, sweet, and creamy, this Vegan Edible Cookie Dough is an amazing and
-                // easy dessert or snack! Simply serve in a bowl and enjoy!",
-                // MealType.DESSERTS,
-                // List.of(i80, i81, i82, i10, i70, i50),
-                // "Vegan-Edible-Cookie-Dough.jpg");
+                Recipe r16 = new Recipe("Vegan Edible Cookie Dough", 30,
+                                List.of("(1) In a food processor, blend the chickpeas until smooth.;\n" +
+                                                "(2) Add oats, maple syrup, peanut butter, and almond extract and blend.;\n"
+                                                +
+                                                "(3) Transfer to a bowl and add mix-ins. Mix until combined;\n"
+                                                +
+                                                "(4) Serve in a bowl and enjoy!;\n"),
+                                "Smooth, sweet, and creamy, this Vegan Edible Cookie Dough is an amazing and" +
+                                                "easy dessert or snack! Simply serve in a bowl and enjoy!",
+                                MealType.DESSERTS, "Vegan-Edible-Cookie-Dough.jpg",
+                                List.of("Chickpeas\nNut Butter\nAlmond Extract\nOats\nMaple Syrup\nChocolate Chips"));
 
-                // recipeRepository.save(r16);
+                recipeService.create(r16);
 
-                // Ingredient i83 = new Ingredient("Avocado", FoodType.FRUITS);
-                // Ingredient i84 = new Ingredient("Tahini", FoodType.OTHER);
-                // Ingredient i85 = new Ingredient("Garlic Cloves", FoodType.FRUITS);
-                // Ingredient i86 = new Ingredient("Lemon Juice ", FoodType.FRUITS);
-                // ingredientRepository.saveAll(List.of(i83, i84, i85, i86));
+                Recipe r17 = new Recipe("Vegan Avocado Hummus", 5,
+                                List.of("(1) Add all ingredients in a food processor or blender. Blend until" +
+                                                "smooth.;\n" +
+                                                "(2) Add more water if needed.;\n"
+                                                +
+                                                "(3) Serve with chips, crackers, or carrots.;\n"
+                                                +
+                                                "(4) Enjoy!\n"),
+                                "This Vegan Avocado Hummus is creamy, light, and absolutely delicious! Using" +
+                                                "only a few ingredients, this dip is like guacamole and hummus combined—a"
+                                                +
+                                                "win-win for everyone!",
+                                MealType.SAUCES_AND_ACCOMPANIMENTS, "avocadohummus.jpg",
+                                List.of("Avocado\nTahini\nGarlic Cloves\nLemon Juice"));
 
-                // Recipe r17 = new Recipe("Vegan Avocado Hummus", 5,
-                // "(1) Add all ingredients in a food processor or blender. Blend until
-                // smooth.;\n" +
-                // "(2) Add more water if needed.;\n"
-                // +
-                // "(3) Serve with chips, crackers, or carrots.;\n"
-                // +
-                // "(4) Enjoy!\n",
-                // "This Vegan Avocado Hummus is creamy, light, and absolutely delicious! Using
-                // only a few ingredients, this dip is like guacamole and hummus combined—a
-                // win-win for everyone!",
-                // MealType.SAUCES_AND_ACCOMPANIMENTS,
-                // List.of(i83, i84, i85, i86, i80, i29, i5, i59),
-                // "avocadohummus.jpg");
+                recipeService.create(r17);
 
-                // recipeRepository.save(r17);
+                Recipe r18 = new Recipe("Vegan Iced Cappuccino ", 365,
+                                List.of("(1) Freeze the banana overnight.;\n" +
+                                                "(2) Stir the instant coffee mix and cold water together to make cold coffee.;\n"
+                                                +
+                                                "(3) Blend together the frozen bananas, ice cubes, cold coffee, plant-based milk, and dates.;\n"
+                                                +
+                                                "(4) Serve and enjoy! \n"),
+                                "This flavorful Vegan Iced Cappuccino is the ultimate drink for hot days!" +
+                                                "Using cold coffee, bananas, your favorite plant-based milk, and Medjool"
+                                                +
+                                                "dates, this recipe is one you can make in no time!"
+                                                +
+                                                "all ingredients to the blender and blend!",
+                                MealType.DRINKS, "vegan-iced-cappuchino.jpg",
+                                List.of("Ice Cubes\nInstant Coffe Mix\nMedjool Dates\nBanana\nSoy Milk"));
 
-                // Ingredient i87 = new Ingredient("Ice Cubes ", FoodType.OTHER);
-                // Ingredient i88 = new Ingredient("Instant Coffe Mix ", FoodType.OTHER);
-                // Ingredient i89 = new Ingredient("Medjool Dates", FoodType.OTHER);
-                // ingredientRepository.saveAll(List.of(i87, i88, i89));
+                recipeService.create(r18);
 
-                // Recipe r18 = new Recipe("Vegan Iced Cappuccino ", 365,
-                // "(1) Freeze the banana overnight.;\n" +
-                // "(2) Stir the instant coffee mix and cold water together to make cold
-                // coffee.;\n"
-                // +
-                // "(3) Blend together the frozen bananas, ice cubes, cold coffee, plant-based
-                // milk, and dates.;\n"
-                // +
-                // "(4) Serve and enjoy! \n",
-                // "This flavorful Vegan Iced Cappuccino is the ultimate drink for hot days!
-                // Using cold coffee, bananas, your favorite plant-based milk, and Medjool
-                // dates, this recipe is one you can make in no time!",
-                // MealType.DRINKS,
-                // List.of(i87, i88, i89, i78, i23),
-                // "vegan-iced-cappuchino.jpg");
+                Recipe r19 = new Recipe("Vegan Berry IceCream ", 5,
+                                List.of("(1) Freeze bananas overnight.;\n" +
+                                                "(2) Put in frozen bananas, frozen berries, and almond milk into a blender.;\n"
+                                                +
+                                                "(3) Serve and enjoy! \n"),
+                                "Creamy, energizing, and super healthy, this Vegan Breakfast Smoothie is a" +
+                                                "perfect and easy drink to make when you don’t have a lot of time. Simply add"
+                                                +
+                                                "all ingredients to the blender and blend!",
+                                MealType.DESSERTS, "berry-nice-cream.jpg",
+                                List.of("Raspberries\nStrawberry\nCranberry\nSoy Milk\nBanana"));
 
-                // recipeRepository.save(r18);
+                recipeService.create(r19);
 
-                // Ingredient i90 = new Ingredient("Raspberries", FoodType.FRUITS);
-                // ingredientRepository.saveAll(List.of(i90));
+                Recipe r20 = new Recipe("Vegan Creamy Radish Salad", 10,
+                                List.of("(1) Cut the radishes and cucumbers.;\n" +
+                                                "(2) Combine mayo with seasoning.;\n"
+                                                +
+                                                "(3) Toss everything together.;\n"
+                                                +
+                                                "(4) Serve and enjoy! \n"),
+                                "This Vegan Creamy Radish Salad is a delicious, refreshing, and healthy dish" +
+                                                "you can make in just minutes! Using only a few ingredients, this is a recipe"
+                                                +
+                                                "you must try!",
+                                MealType.SALADS, "vegan-radish-salad.jpg",
+                                List.of("Radishes\nCucumbers\nDried Dill\nVegan Mayonnaise\nGarlic\nParsley\nSalt\nBlack Pepper"));
 
-                // Recipe r19 = new Recipe("Vegan Berry IceCream ", 5,
-                // "(1) Freeze bananas overnight.;\n" +
-                // "(2) Put in frozen bananas, frozen berries, and almond milk into a
-                // blender.;\n"
-                // +
-                // "(3) Put in frozen bananas, frozen berries, and almond milk into a
-                // blender.;\n"
-                // +
-                // "(4) Serve and enjoy! \n",
-                // "This Vegan Berry Nice Cream is the perfect dessert for hot summer days. This
-                // dairy-free and sugar-free ice cream can be made in a blender in just minutes!
-                // Plus, it’s quick, easy, and only requires 3 ingredients!",
-                // MealType.DESSERTS,
-                // List.of(i90, i15, i13, i23, i78),
-                // "berry-nice-cream.jpg");
+                recipeService.create(r20);
 
-                // recipeRepository.save(r19);
+                Recipe r21 = new Recipe("Easy Moroccan Lentils", 40,
+                                List.of("(1) Saute the onions and garlic in your Instant Pot.;\n" +
+                                                "(2) Add all remaining ingredients and stir in.;\n"
+                                                +
+                                                "(3) Cook for 30 minutes on manual setting.;\n"
+                                                +
+                                                "(4) Enjoy! \n"),
+                                "These Easy Moroccan Lentils are healthy, flavorful, and delicious for lunch" +
+                                                "or dinner! Plus, they only take 30 minutes to cook!",
+                                MealType.SALADS, "Moroccan-lentils.jpg",
+                                List.of("Green Lentils\nGreen Bell Pepper\nTurmeric\nChili Powder\nTomato\nGarlic\nOnion\nCumin\nGinger"));
 
-                // Ingredient i91 = new Ingredient("Radishes", FoodType.OTHER);
-                // Ingredient i92 = new Ingredient("Cucumbers", FoodType.OTHER);
-                // Ingredient i93 = new Ingredient("Dried Dill", FoodType.OTHER);
-                // ingredientRepository.saveAll(List.of(i91, i92, i93));
+                recipeService.create(r21);
 
-                // Recipe r20 = new Recipe("Vegan Creamy Radish Salad", 10,
-                // "(1) Cut the radishes and cucumbers.;\n" +
-                // "(2) Combine mayo with seasoning.;\n"
-                // +
-                // "(3) Toss everything together.;\n"
-                // +
-                // "(4) Serve and enjoy! \n",
-                // "This Vegan Creamy Radish Salad is a delicious, refreshing, and healthy dish
-                // you can make in just minutes! Using only a few ingredients, this is a recipe
-                // you must try!",
-                // MealType.SALADS,
-                // List.of(i91, i92, i93, i47, i32, i41, i5, i9),
-                // "vegan-radish-salad.jpg");
+                Recipe r22 = new Recipe("Vegan Chai Latte", 10,
+                                List.of("(1) Brew tea according to instructions. Add almond milk and maple syrup and stir.;\n"
+                                                +
+                                                "(2) Top with whipped cream;\n"
+                                                +
+                                                "(3) Enjoy! \n"),
+                                "This Vegan Chai Latte is the perfect drink for the winter! Cinnamon, chai" +
+                                                "spices, and coconut whipped cream really make this drink delicious.\nCinnamon"
+                                                +
+                                                "and the chai flavor really bring out the best of this drink. And with vegan"
+                                                +
+                                                "whipped cream on top? Sounds too good to be true!",
+                                MealType.DRINKS, "vegan-chai-latte.jpg",
+                                List.of("Tea\nVegan Whipped Cream\nSoy Milk\nMaple Syrup"));
 
-                // recipeRepository.save(r20);
+                recipeService.create(r22);
 
-                // Ingredient i94 = new Ingredient("Green Lentils ",
-                // FoodType.CEREALS_AND_PULSES);
-                // Ingredient i95 = new Ingredient("Green Bell Pepper",
-                // FoodType.SPICES_AND_HERBS);
-                // Ingredient i96 = new Ingredient("Turmeric ", FoodType.OTHER);
-                // Ingredient i97 = new Ingredient("Chili Powder ", FoodType.SPICES_AND_HERBS);
-                // ingredientRepository.saveAll(List.of(i94, i95, i96, i97));
+                Recipe r23 = new Recipe("Dalgona Coffe ", 5,
+                                List.of("(1) Mix the instant coffee, sugar, and water together in a medium-sized bowl until peaks form.;\n"
+                                                +
+                                                "(2) In a cup or mug, fill two-thirds of the cup with cold or hot milk. I used almond milk.;\n"
+                                                +
+                                                "(3) Fill the rest of the cup with the coffee foam.; " +
+                                                "(4) Sprinkle over cinnamon or crushed Dalgona on top or serve as is.; "
+                                                +
+                                                "(5) Enjoy! "),
+                                "This Dalgona Coffee is a delicious drink with a base of milk, topped with" +
+                                                "smooth coffee foam! This highly popular Korean drink can be served hot or"
+                                                +
+                                                "cold!\nDalgona is the name of a Korean honeycomb toffee that was a popular"
+                                                +
+                                                "street food in the 70s to 80s. You can make this and sprinkle chunks of it on"
+                                                +
+                                                "top of your coffee!",
+                                MealType.DRINKS, "dalgona-coffee.jpg",
+                                List.of("Coconut Sugar\nInstant Coffe Mix\nAlmond Milk"));
 
-                // Recipe r21 = new Recipe("Easy Moroccan Lentils", 40,
-                // "(1) Saute the onions and garlic in your Instant Pot.;\n" +
-                // "(2) Add all remaining ingredients and stir in.;\n"
-                // +
-                // "(3) Cook for 30 minutes on manual setting.;\n"
-                // +
-                // "(4) Enjoy! \n",
-                // "These Easy Moroccan Lentils are healthy, flavorful, and delicious for lunch
-                // or dinner! Plus, they only take 30 minutes to cook!",
-                // MealType.SALADS,
-                // List.of(i94, i95, i96, i97, i31, i32, i2, i59, i79),
-                // "Moroccan-lentils.jpg");
+                recipeService.create(r23);
 
-                // recipeRepository.save(r21);
+                Recipe r24 = new Recipe("Vegan Banana Bread", 60,
+                                List.of("(1) Preheat oven to 350° F.;\n" +
+                                                "(2) Spray a loaf pan with oil and line with parchment paper.;\n"
+                                                +
+                                                "(3) Mash bananas in a bowl and add the brown sugar, vegetable oil, sugar, and vanilla extract, then mix.;\n"
+                                                +
+                                                "(4) In a separate bowl, put in the flour, baking soda, salt, and cinnamon, and mix. Mix in the walnuts.;"
+                                                +
+                                                "(5) Pour the wet ingredients into the dry ingredients and fold until well combined.;"
+                                                +
+                                                "(6) Pour batter into the loaf pan.;" +
+                                                "(7) Spread the batter evenly across the pan.;" +
+                                                "(8) Bake for 50 minutes or until when you poke a toothpick in it, nothing sticks.;"
+                                                +
+                                                "(9) Let it cool completely.;" +
+                                                "(10) Enjoy!;"),
+                                "This Vegan Banana Bread is perfect for breakfast or as a snack. It’s super" +
+                                                "easy and absolutely delicious!\nI’ve been working on a vegan banana bread"
+                                                +
+                                                "recipe for a while now, and I’ve finally created it! It’s moist, flavorful,"
+                                                +
+                                                "and you would never guess there’s no dairy or egg in it! I enjoy this banana"
+                                                +
+                                                "bread with chopped nuts, but you can put any kind of dried fruit or even"
+                                                +
+                                                "chocolate chips in.",
+                                MealType.BREAD_AND_CAKES, "vegan-banana-bread.jpg",
+                                List.of("Baking Soda\nSalt\nVanilla extract\nBanana\nGranulated Sugar\nBrown Sugar\nVegetable Oil\nAll-Prpose Flour\nGround Cinnamon\nChopped Walnuts"));
 
-                // Ingredient i98 = new Ingredient("Tea", FoodType.OTHER);
-                // Ingredient i99 = new Ingredient("Vegan Whipped Cream", FoodType.OTHER);
-                // ingredientRepository.saveAll(List.of(i98, i99));
+                recipeService.create(r24);
 
-                // Recipe r22 = new Recipe("Vegan Chai Latte", 10,
-                // "(1) Brew tea according to instructions. Add almond milk and maple syrup and
-                // stir.;\n" +
-                // "(2) Top with whipped cream;\n"
-                // +
-                // "(3) Enjoy! \n",
-                // "This Vegan Chai Latte is the perfect drink for the winter! Cinnamon, chai
-                // spices, and coconut whipped cream really make this drink delicious.\nCinnamon
-                // and the chai flavor really bring out the best of this drink. And with vegan
-                // whipped cream on top? Sounds too good to be true!",
-                // MealType.DRINKS,
-                // List.of(i98, i99, i23, i70),
-                // "vegan-chai-latte.jpg");
+                Recipe r25 = new Recipe("Oatmeal", 10,
+                                List.of("(1) Put the oats, milk, water, coconut oil, and salt into a pot and place it on the stove.;\n"
+                                                +
+                                                "(2) Mix, and cook until creamy.;\n"
+                                                +
+                                                "(3) Transfer oatmeal into a bowl and add your toppings.;\n"
+                                                +
+                                                "(4) Enjoy!;"),
+                                "Learn how to make the best oatmeal. This recipe will help you turn oats into" +
+                                                "a creamy and delicious breakfast!\nOne of my favorite breakfasts to make is"
+                                                +
+                                                "oatmeal! It is easy to make and only needs a few ingredients. To keep it"
+                                                +
+                                                "vegan, I use almond milk but you can use any nut milk you like. Plus, you can"
+                                                +
+                                                "top it with anything, so you never get bored with the flavors!",
+                                MealType.DESSERTS, "the-best-oatmeal.jpg",
+                                List.of("Old-Fashioned Oats\nToppings\nWater\nAlmond Milk\nSalt\nCoconut oil"));
 
-                // recipeRepository.save(r22);
+                recipeService.create(r25);
 
-                // Recipe r23 = new Recipe("Dalgona Coffe ", 5,
-                // "(1) Mix the instant coffee, sugar, and water together in a medium-sized bowl
-                // until peaks form.;\n"
-                // +
-                // "(2) In a cup or mug, fill two-thirds of the cup with cold or hot milk. I
-                // used almond milk.;\n"
-                // +
-                // "(3) Fill the rest of the cup with the coffee foam.; " +
-                // "(4) Sprinkle over cinnamon or crushed Dalgona on top or serve as is.; "
-                // +
-                // "(5) Enjoy! ",
-                // "This Dalgona Coffee is a delicious drink with a base of milk, topped with
-                // smooth coffee foam! This highly popular Korean drink can be served hot or
-                // cold!\nDalgona is the name of a Korean honeycomb toffee that was a popular
-                // street food in the 70s to 80s. You can make this and sprinkle chunks of it on
-                // top of your coffee!",
-                // MealType.DRINKS,
-                // List.of(i51, i88, i49),
-                // "dalgona-coffee.jpg");
-
-                // recipeRepository.save(r23);
-
-                // Ingredient i101 = new Ingredient("Granulated Sugar",
-                // FoodType.SUGAR_AND_SUGAR_PRODUCTS);
-                // Ingredient i102 = new Ingredient("Brown Sugar",
-                // FoodType.SUGAR_AND_SUGAR_PRODUCTS);
-                // Ingredient i103 = new Ingredient("Vegetable Oil", FoodType.OTHER);
-                // Ingredient i104 = new Ingredient("All-Prpose Flour", FoodType.OTHER);
-                // Ingredient i105 = new Ingredient("Ground Cinnamon ", FoodType.OTHER);
-                // Ingredient i106 = new Ingredient("Chopped Walnuts ",
-                // FoodType.CEREALS_AND_PULSES);
-
-                // ingredientRepository.saveAll(List.of(i101, i102, i103, i104, i105, i106));
-
-                // Recipe r24 = new Recipe("Vegan Banana Bread", 60,
-                // "(1) Preheat oven to 350° F.;\n" +
-                // "(2) Spray a loaf pan with oil and line with parchment paper.;\n"
-                // +
-                // "(3) Mash bananas in a bowl and add the brown sugar, vegetable oil, sugar,
-                // and vanilla extract, then mix.;\n"
-                // +
-                // "(4) In a separate bowl, put in the flour, baking soda, salt, and cinnamon,
-                // and mix. Mix in the walnuts.;"
-                // +
-                // "(5) Pour the wet ingredients into the dry ingredients and fold until well
-                // combined.;"
-                // +
-                // "(6) Pour batter into the loaf pan.;" +
-                // "(7) Spread the batter evenly across the pan.;" +
-                // "(8) Bake for 50 minutes or until when you poke a toothpick in it, nothing
-                // sticks.;"
-                // +
-                // "(9) Let it cool completely.;" +
-                // "(10) Enjoy!;",
-                // "This Vegan Banana Bread is perfect for breakfast or as a snack. It’s super
-                // easy and absolutely delicious!\nI’ve been working on a vegan banana bread
-                // recipe for a while now, and I’ve finally created it! It’s moist, flavorful,
-                // and you would never guess there’s no dairy or egg in it! I enjoy this banana
-                // bread with chopped nuts, but you can put any kind of dried fruit or even
-                // chocolate chips in.",
-                // MealType.BREAD_AND_CAKES,
-                // List.of(i62, i5, i53, i78, i101, i102, i103, i104, i105, i106),
-                // "vegan-banana-bread.jpg");
-
-                // recipeRepository.save(r24);
-
-                // Ingredient i107 = new Ingredient("Old-Fashioned Oats",
-                // FoodType.CEREALS_AND_PULSES);
-                // Ingredient i108 = new Ingredient("Toppings", FoodType.OTHER);
-
-                // ingredientRepository.saveAll(List.of(i107, i108));
-
-                // Recipe r25 = new Recipe("Oatmeal", 10,
-                // "(1) Put the oats, milk, water, coconut oil, and salt into a pot and place it
-                // on the stove.;\n"
-                // +
-                // "(2) Mix, and cook until creamy.;\n"
-                // +
-                // "(3) Transfer oatmeal into a bowl and add your toppings.;\n"
-                // +
-                // "(4) Enjoy!;",
-                // "Learn how to make the best oatmeal. This recipe will help you turn oats into
-                // a creamy and delicious breakfast!\nOne of my favorite breakfasts to make is
-                // oatmeal! It is easy to make and only needs a few ingredients. To keep it
-                // vegan, I use almond milk but you can use any nut milk you like. Plus, you can
-                // top it with anything, so you never get bored with the flavors!",
-                // MealType.DESSERTS,
-                // List.of(i36, i49, i5, i25, i107, i108),
-                // "the-best-oatmeal.jpg");
-
-                // recipeRepository.save(r25);
         }
 
 }
