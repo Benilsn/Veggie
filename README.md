@@ -24,17 +24,38 @@
 <br>
 <br>
 
-# Pagina inicial:
+### Credenciais padrão:
+
+>ADMIN
+>login: admin@gmail.com <br>
+>password: 123
+
+
+>USER         
+>login: usuario1@gmail.com <br>
+>password: 123    
+
+>USER2     
+>login: usuario2@gmail.com <br>
+>password: 123  
+
+<br>
+<br>
+
+# Overview:
+<br>
+
+## Pagina inicial:
 <img src="src\main\resources\static\docs\pagina-inicial.png"></img>
 
 <br>
 <br>
 
-# Pagina de login:
+## Pagina de login:
 <img src="src\main\resources\static\docs\login-screen.png"></img>
 
 <br>
 <br>
 
-# Pagina de registro:
+## Pagina de registro:
 <img src="src\main\resources\static\docs\register-screen.png"></img>

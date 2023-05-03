@@ -35,13 +35,16 @@ public class DataLoader implements CommandLineRunner {
         }
 
         void createUsers() {
-                User admin = new User(null, "Admin", "admin@hotmail.com", encoder.encode("123"),
+                User admin = new User(null, "Admin", "admin@gmail.com", encoder.encode("123"),
                                 new SimpleGrantedAuthority("ROLE_ADMIN"), "photoless.jpg", true);
-                User user1 = new User(null, "Joao", "joao.silva@gmail.com", encoder.encode("123"),
+                User user1 = new User(null, "Joao", "usuario1@gmail.com", encoder.encode("123"),
+                                new SimpleGrantedAuthority("ROLE_USER"),
+                                "photoless.jpg", true);
+                User user2 = new User(null, "Joao", "usuario2@gmail.com", encoder.encode("123"),
                                 new SimpleGrantedAuthority("ROLE_USER"),
                                 "photoless.jpg", true);
 
-                userRepository.saveAll(List.of(admin, user1));
+                userRepository.saveAll(List.of(admin, user1, user2));
         }
 
         void createRecipes() {

@@ -71,6 +71,8 @@ public class HomeController {
                         .stream().reduce(0, (a, b) -> a + b).doubleValue() / rateAmount;
             }
 
+            recipeAverageRating = Math.round(recipeAverageRating * 100.0) / 100.0;
+
             model.addAttribute("pageTitle", recipe.getName() + " | Veggie");
             model.addAttribute("recipe", recipe);
             model.addAttribute("comment", new Comments());
