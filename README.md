@@ -42,6 +42,17 @@
 <br>
 <br>
 
+## Base de dados disponivel no diretorio: <br>
+>http://localhost:8080/h2
+
+## Credenciais:
+>url: jdbc:h2:mem:veggie
+<br>
+>username: admin
+<br>
+>password: 
+
+<br>
 # Overview:
 <br>
 

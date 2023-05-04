@@ -4,7 +4,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /auth/admin/h2
+      path: /h2
   datasource:
     url: jdbc:h2:mem:veggie
     username: admin
