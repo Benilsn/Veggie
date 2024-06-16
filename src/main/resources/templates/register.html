@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <section class="vh-100 mt-5">
+
+        <div class="container-fluid">
+
+            <div class="row d-flex justify-content-center">
+
+                <div class="col-md-8 col-lg-6 col-xl-4">
+                    <form id="registerForm" class="form-group container" method="post" th:action="@{/user/save}" th:object="${newUser}">
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="newName"><strong>Your name:</strong></label>
+                            <input type="text" id="newName" class="form-control form-control-lg" placeholder="Enter your name" th:field="*{name}" />
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="newEmail"><strong>E-mail:</strong></label>
+                            <input type="email" id="newEmail" class="form-control form-control-lg" placeholder="Enter a valid email address" th:field="*{email}" />
+                            <div th:if="${emailTaken}">
+                                <ul>
+                                    <li class="text-danger">[[${emailTaken}]]</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="newPassword"><strong>Password:</strong></label>
+                            <input type="password" id="newPassword" class="form-control form-control-lg" placeholder="Enter password" th:field="*{password}" />
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="verifyPassword"><strong>Confirm
+                                    Password:</strong></label>
+                            <input type="password" id="verifyPassword" class="form-control form-control-lg" placeholder="Confirm your password" />
+                        </div>
+
+                        <div th:if="${errors}">
+                            <ul>
+                                <li class="text-danger" th:each="err : ${errors}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group text-center text-lg-start mt-4 pt-2">
+                            <button type="submit" class="btn btn-success btn-lg">Register</button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a th:href="@{/login}" class="link-danger">Login</a></p>
+                        </div>
+                </div>
+                </form>
+                <div class="img col-md-9 col-lg-6 m-3">
+                    <img th:src="@{/img/dog-register-page.jpg}" class="img-fluid img-thumbnail" alt="Sample image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function verifyPassword() {
+            let pass1 = document.getElementById("newPassword").value;
+            let pass2 = document.getElementById("verifyPassword").value;
+            let match = true;
+            if (pass1 != pass2) {
+                document.getElementById("newPassword").style.borderColor = "#ff0000";
+                document.getElementById("verifyPassword").style.borderColor = "#ff0000";
+                match = false;
+            }
+            return match;
+        }
+        document.getElementById('registerForm').onsubmit = verifyPassword;
+    </script>
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>

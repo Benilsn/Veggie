@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/head :: head}"></head>
+
+<style>
+    input[type=checkbox]:checked+label.box {
+        text-decoration: line-through;
+    }
+</style>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+
+    <div class="container-fluid mt-5 d-flex justify-content-center mb-5">
+
+        <div class="card-deck row" style="width:70em;">
+
+            <div class="card col">
+                <div class="card-body">
+                    <br>
+                    <label class="h3 mb-3" for=""><strong>Preparation Time: [[${recipe.preparationTime}]]
+                            minutes.</strong></label>
+                    <hr>
+                    <label class="h3 mb-3"><strong>Ingredients:</strong></label>
+
+                    <ul class="navbar-nav">
+                        <li th:each="Ingredient : ${recipe.Ingredients}">
+                            <div class="d-flex">
+                                <input class="m-1" type="checkbox" th:id="*{Ingredient}">
+                                <label class="box m-1" th:for="*{Ingredient}" th:text="*{Ingredient}"></label>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <hr>
+                    <label class="h3 m-3" for=""><strong>Preparation mode:</strong></label>
+                    <ul class="navbar-nav">
+                        <li th:each="prep : ${recipe.preparationMode}">
+                            <div class="d-flex">
+                                <label class="box m-1" th:for="*{prep}" th:text="*{prep}"></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card col text-center">
+                <div class="d-flex justify-content-center m-3">
+                    <h2 class="card-title text-center m-2"><strong>[[${recipe.name}]]</strong</h2>
+                </div>
+            <div class="container-fluid d-flex justify-content-center">
+                <p class="mx-5" style="font-size:25px">[[${recipeAverageRating}]]</p>
+                <span class="rating">
+                    <span th:each="i : ${#numbers.sequence(5, 1)}">
+                        <span th:if="${i <= recipeAverageRating}">
+                            <span th:if="${i < recipeAverageRating}">
+                                <span class="fa fa-star checked text-warning"></span>
+                            </span>
+                            <span th:if="${i >= recipeAverageRating}">
+                                <span class="fa fa-star-half checked text-warning"></span>
+                            </span>
+                        </span>
+                        <span th:unless="${i <= recipeAverageRating}">
+                            <span class="fa fa-star text-muted"></span>
+                        </span>
+                    </span>
+                </span>
+                <p class="mx-4">([[${rateAmount}]])</p>
+            </div>
+                <hr>
+
+                <h3><strong>Description:</strong></h3>
+                        <p class="card-text m-3" th:text="${recipe.description}"></p>
+                        <img class="card-img mt-2" th:src="@{'/img/recipes/'+*{recipe.image_address}}" alt="Card image cap" style="height:500px; width:500px;">
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/comments :: comments}"></div>
+
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>

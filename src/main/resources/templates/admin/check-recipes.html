@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="alert alert-success alert-dismissible d-flex align-items-center fade show justify-content-center mt-1" th:if="${message}">
+        <i class="fa fa-check-circle" aria-hidden="true"></i>
+        <strong class="mx-2">Success!</strong>
+        <p class="my-2" th:text="${message}"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="container-lg mt-4 mb-5">
+
+        <div class="alert alert-danger alert-dismissible fade show mt-5 text-center" th:if="${#lists.isEmpty(listOfRecipes)}">
+            <h4 class="alert-heading"><i class="fa fa-exclamation" aria-hidden="true"></i> Oops! Nothing to show here.</h4>
+            <hr>
+            <p class="mb-0">No Recipes found!</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="container" th:unless="${#lists.isEmpty(listOfRecipes)}">
+            <table id="myTable" class="table table-hover table-stripped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="text-center">Image</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Prep. time</th>
+                        <th class="text-center">Prep. mode</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Meal Type</th>
+                        <th class="text-center" style="width: 10em;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="recipe : ${listOfRecipes}">
+                        <tr>
+                            <td class="text-center"><img class="card-img mt-2" th:src="@{'/img/recipes/'+${recipe.image_address}}" alt="Card image cap" style="height:150px; width:150px;">
+                            </td>
+                            <td class="text-center" th:text="${recipe.id}"></td>
+                            <td class="text-center" th:text="${recipe.name}"></td>
+                            <td class="text-center" th:text="${recipe.preparationTime} + ' min'"></td>
+                            <td class="text-center" th:text="${#strings.abbreviate(recipe.preparationMode ,75)}"></td>
+                            <td class="text-center" th:text="${#strings.abbreviate(recipe.preparationMode ,75)}"></td>
+                            <td class="text-center" th:text="${recipe.type.name}"></td>
+                            <td>
+                                <a class="btn btn-warning" th:href="@{'/admin/recipes/edit/' + ${recipe.id}}"><strong><i
+                                            class="fas fa-edit"></i>Edit</strong></a>
+                                <a class="btn btn-danger" th:href="@{'/admin/recipes/delete/' + ${recipe.id}}" onclick="return confirm('Are you sure?')"><strong><i class="fa fa-trash"
+                                            aria-hidden="true"></i>Delete</strong></a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <div th:replace="~{fragments/table-sort :: table-sort}"></div>
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>

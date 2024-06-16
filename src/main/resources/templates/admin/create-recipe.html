@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="alert alert-success d-flex justify-content-center mt-2" th:if="${message}" th:text="${message}"></div>
+
+    <div class="form-group-sm container border mt-5 mb-5">
+        <div class="d-flex justify-content-center m-2">
+            <img th:src="@{/img/icons8-recipe-64.png}" />
+            <h3 class="h2 mt-3">New Recipe</h3>
+        </div>
+
+        <form method="post" th:action="@{/admin/recipes/save}" enctype="multipart/form-data" th:object="${newRecipe}">
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="name" class="label"><strong>Name:</strong></label>
+                        <input th:field="*{name}" placeholder="Recipe name" id="name" class="form-control" type="text" />
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="prep_time" class="label"><strong>Prep. time:</strong></label
+              >
+              <input
+                th:field="*{preparationTime}"
+                placeholder="Minutes"
+                id="prep_time"
+                class="form-control"
+                type="number"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="salary"><strong>Meal type:</strong></label>
+                        <select class="form-select" th:field="*{type}">
+                <option
+                  th:each="type: ${T(br.com.veggierecipes.veggierecipes.models.enums.MealType).values()}"
+                  th:value="${type}"
+                  th:text="${type.name}"
+                ></option>
+              </select>
+                    </div>
+                </div>
+                <label for="ingredients"><strong>Ingredients:</strong></label>
+                <textarea id="ingredients" th:field="*{ingredients}" rows="5" class="form-control numbered-textarea" placeholder="1. Enter ingredient&#10;2. Enter ingredient&#10;3. Enter ingredient&#10;4. Enter ingredient&#10;5. Enter ingredient&#10;" data-number="1"></textarea>
+
+                <div class="form-group mt-2">
+                    <label for="preparation_mode"><strong>Preparation mode:</strong></label
+            >
+            <textarea
+              class="form-control numbered-textarea"
+              id="preparation_mode"
+              rows="5"
+              th:field="*{preparationMode}"
+              placeholder="1. Step&#10;2. Step&#10;3. Step&#10;4. Step&#10;5. Step&#10;"
+            ></textarea>
+          </div>
+
+          <div class="form-group mt-2">
+            <label for="description"><strong>Description:</strong></label>
+                    <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                </div>
+                <div class="form-froup my-4">
+                    <label for="image"><strong>Recipe's image:</strong></label>
+                    <input type="file" name="image" id="image" />
+                    <hr />
+                </div>
+
+                <div th:if="${errors}">
+                    <ul>
+                        <li class="text-danger" th:each="err : ${errors}" th:text="${err}"></li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-center m-4">
+                    <button class="btn btn-primary w-50">Next</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>

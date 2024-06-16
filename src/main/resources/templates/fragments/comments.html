@@ -1,0 +1,195 @@
+<div class="container" th:fragment="comments">
+
+    <style>
+        .be-comment-block {
+            margin-bottom: 50px !important;
+            border: 1px solid #edeff2;
+            border-radius: 2px;
+            padding: 50px 70px;
+            border: 1px solid #ffffff;
+        }
+        
+        .comments-title {
+            font-size: 16px;
+            color: #262626;
+            margin-bottom: 15px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+        
+        .be-img-comment {
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-bottom: 15px;
+        }
+        
+        .be-ava-comment {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        
+        .be-comment-content {
+            margin-left: 80px;
+        }
+        
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+        
+        .be-comment-name {
+            font-size: 15px;
+            font-family: 'Conv_helveticaneuecyr-bold';
+        }
+        
+        .be-comment-content a {
+            color: #383b43;
+        }
+        
+        .be-comment-content span {
+            display: inline-block;
+            width: 49%;
+            margin-bottom: 15px;
+        }
+        
+        .be-comment-time {
+            text-align: right;
+        }
+        
+        .be-comment-time {
+            font-size: 11px;
+            color: #b4b7c1;
+        }
+        
+        .be-comment-text {
+            font-size: 13px;
+            line-height: 18px;
+            color: #7a8192;
+            display: block;
+            background: #f6f6f7;
+            border: 1px solid #edeff2;
+            padding: 15px 20px 20px 20px;
+        }
+        
+        .form-group .form-input {
+            font-size: 13px;
+            line-height: 100px;
+            font-weight: 400;
+            color: #b4b7c1;
+            width: 100%;
+            height: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 1px solid #edeff2;
+            border-radius: 3px;
+        }
+        
+        .form-group.fl_icon .form-input {
+            padding-left: 70px;
+        }
+        
+        .form-group textarea.form-input {
+            height: 150px;
+        }
+        
+        .rating input[type="radio"] {
+            display: none;
+        }
+        
+        .rating {
+            direction: rtl;
+        }
+        
+        .rating .star {
+            font-size: 24px;
+            color: #ddd;
+        }
+        
+        .rating input[type="radio"] {
+            display: none;
+        }
+        
+        .rating label i {
+            font-size: 24px;
+            color: #ddd;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .rating input[type="radio"]:checked~label i,
+        .rating input[type="radio"]:hover~label i {
+            color: #FFD700;
+            transform: scale(1.2);
+        }
+    </style>
+
+    <div th:if="${#authorization.expression('!isAuthenticated()')}" class="container">
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading text-center h3">Comments section!</h4>
+            <hr>
+            <p class="mb-0 text-center">Create your <a th:href="@{/register}">Account</a> and see what people are saying about this recipe! </p>
+        </div>
+    </div>
+
+    <div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
+        <div class="be-comment-block">
+
+            <h1 class="comments-title" th:text="${'('+#lists.size(recipe.comments)+') Comments'}"></h1>
+
+            <div class="be-comment h2" th:each="comment : ${recipe.comments}">
+                <div class="be-img-comment">
+                    <img th:src="@{'/img/users/'+${comment.author_image_address}}" alt="" class="be-ava-comment">
+                </div>
+                <div class="be-comment-content">
+                    <span class="be-comment-name">
+                        <p>[[*{comment.author_name}]]</p>
+                    </span>
+                    <span class="be-comment-time" th:text="*{#temporals.format(comment.commentedAt, 'MMMM dd, yyyy')}"><i class="fa fa-clock-o"></i></span>
+
+                    <p class="be-comment-text" style="font-size: 22px" th:text="*{comment.content}"></p>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <form class="form-block" method="post" th:action="@{'/recipes/' + ${recipe.id}}" th:if="${#authorization.expression('isAuthenticated()')}">
+                <div class="form-group text-center">
+                    <label for="star1" class="star-label text-success"><i class="fas fa-leaf"></i> How veggie-tastic was this dish?</label>
+                    <div class="rating m-2">
+                        <input type="radio" id="star5" name="rating" value="5" th:field="*{rating.rated_value}" />
+                        <label for="star5" title="5 stars" class="star-label">
+                            <i class="star fa-5x fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star4" name="rating" value="4" th:field="*{rating.rated_value}" />
+                        <label for="star4" title="4 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star3" name="rating" value="3" th:field="*{rating.rated_value}" />
+                        <label for="star3" title="3 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star2" name="rating" value="2" th:field="*{rating.rated_value}" />
+                        <label for="star2" title="2 stars" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                        <input type="radio" id="star1" name="rating" value="1" th:field="*{rating.rated_value}" />
+                        <label for="star1" title="1 star" class="star-label">
+                            <i class="star fa fa-star"></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 mb-3">
+                        <div class="form-group">
+                            <textarea class="form-control" th:field="*{comment.content}" required rows="3" placeholder="Leave a Comment"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

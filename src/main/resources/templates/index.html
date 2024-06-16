@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<style>
+    .grow img {
+        height: 300px;
+        width: 300px;
+        -webkit-transition: all 0.5 ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+    
+    .grow img:hover {
+        width: 315px;
+        height: 315px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container-fluid mt-5 mb-5">
+
+        <div class="container-fluid">
+
+
+            <div class="card-deck row d-flex justify-content-center">
+
+                <div class="card border-success m-2" style="max-width: 18rem;">
+                    <div class="card-header text-center">
+                        <h3>Welcome to Veggie <i class="fa fa-leaf text-success" aria-hidden="true"></i></h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4"><strong>Check this out:</strong></h5>
+                        <ul>
+                            <li class="m-2">Plant based foods <i class="fa fa-check text-success" aria-hidden="true"></i></li>
+                            <li class="m-2">Cruelty free products <i class="fa fa-check text-success" aria-hidden="true"></i></li>
+                            <li class="m-2 mb-5">Earth friend company <i class="fa fa-check text-success" aria-hidden="true"></i>
+                            </li>
+                            <hr>
+                            <li class="m-2">WANT MORE <i class="fa fa-question text-success" aria-hidden="true"></i>
+                            </li>
+                            <li class="m-2">Check our Recipes! <i class="fa fa-smile-o" aria-hidden="true"></i> </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <th:block th:each="recipe : ${initialPageRecipes}">
+                    <div class="card col-md-3 m-1 grow d-flex justify-content-center align-items-center" style="width: 25em; ">
+                        <a th:href="@{'/recipes/'+*{recipe.id}}">
+                            <img class="card-img-top mt-3" th:src="@{'/img/recipes/'+*{recipe.image_address}}" alt="Card image cap">
+                        </a>
+                        <div class="card-body">
+                            <a class="text-dark link" th:href="@{'/recipes/'+*{recipe.id}}" style="text-decoration: none;">
+                                <h5 class="card-title text-center" th:text="${recipe.name}"></h5>
+                                <p class="card-text" th:text="*{recipe.description}"></p>
+                            </a>
+
+                            <div class="d-flex justify-content-end mt-2">
+                                <p class="card-text"><small class="text-muted" th:text="${recipe.type.name}"></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</html>
